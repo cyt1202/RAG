@@ -112,13 +112,40 @@ pip install -r requirements.txt
 
 ## 🚀 运行指南
 
+###直接运行
+
+      * **零参数运行 (使用所有默认值)**：
+
+        ```bash
+        python main_rag_app.py
+        ```
+
+        它会自动处理 `input/KG_test.pdf`，提问 "What is the method of MastSAM?"，并将结果保存在 `rag_output/rag_answer.txt`。如果知识图谱和向量库已存在，它会直接跳到问答步骤。
+
+      * **指定问题和输入/输出文件**：
+
+        ```bash
+        python main_rag_app.py -i input/MyOtherReport.docx -q "这份报告的核心观点是什么？" -o rag_output/report_summary.txt
+        ```
+
+        这个命令会处理 `MyOtherReport.docx`，为它构建新的知识图谱和向量库（保存在 `output/MyOtherReport_KG.json` 和 `vector_db/MyOtherReport_faiss_index`），然后回答指定问题，并将结果保存。
+
+      * **强制重新构建**：
+
+        ```bash
+        python main_rag_app.py --force-rebuild
+        ```
+
+
+###分布运行
+
 请按照以下顺序执行脚本，完成整个RAG流程。
 
-### 第1步: 放置源文件
+#### 第1步: 放置源文件
 
 将你希望系统学习的 `.pdf` 或 `.docx` 文件放入 `input` 文件夹。例如，放入 `input/MyReport.pdf`。
 
-### 第2步: 构建知识图谱
+#### 第2步: 构建知识图谱
 
 运行 `1_build_kg.py` 脚本，它会读取 `input` 文件夹中的文档，并生成一个知识图谱。
 
@@ -135,7 +162,7 @@ python 1_build_kg.py
 python 1_build_kg.py --input_file input/KG_test.pdf --output_file output/test_KG.json
 ```
 
-### 第3步: 创建向量数据库
+#### 第3步: 创建向量数据库
 
 运行 `2_build_vectorstore.py` 脚本，它会对文档进行切分、向量化，并构建FAISS索引。
 
@@ -152,7 +179,7 @@ python 2_build_vectorstore.py
 python 2_build_vectorstore.py --pdf_file input/KG_test.pdf --pdf_query "你的PDF问题" --pdf_output output/chonky_chunk_pdf.txt --pdf_db_pat vector_db/faiss_pdf_chonky_index
 ```
 
-### 第4步: 执行混合检索问答
+#### 第4步: 执行混合检索问答
 
 这是最后一步。运行核心脚本 `3_hybrid_rag_cli.py`，并提出你的问题。
 
