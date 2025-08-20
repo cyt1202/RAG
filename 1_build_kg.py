@@ -26,7 +26,7 @@ if not DASHSCOPE_API_KEY:
     print("错误：未找到'DASHSCOPE_API_KEY'环境变量。")
     sys.exit(1)
 
-#运行指令：python test_KG.py --input_file input/your.pdf --output_file output/your_KG.json
+#运行指令：python 1_build_kg.py --input_file input/your.pdf --output_file output/your_KG.json
 if __name__ == "__main__":
     #===================================================================
     # ================在代码中直接设置输入文件路径和查询内容================
