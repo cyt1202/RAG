@@ -150,7 +150,6 @@ def run_hybrid_rag(llm_for_rag, embedding_model, query, kg_path, db_path, output
             return json.load(f)
 
     def search_in_kg(q: str, kg_data: List[Dict]) -> str:
-        # (内部函数与之前版本相同)
         entity_extraction_prompt = ChatPromptTemplate.from_template("从下面的问题中提取出所有的核心实体和关键词，以逗号分隔。问题: {question}")
         entity_extractor = entity_extraction_prompt | llm | StrOutputParser()
         entities = [e.strip() for e in entity_extractor.invoke({"question": q}).split(',')]
