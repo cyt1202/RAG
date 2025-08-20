@@ -1,0 +1,161 @@
+[
+    {
+        "nodes": [
+            {
+                "id": "Mastsam",
+                "type": "Method",
+                "properties": {}
+            },
+            {
+                "id": "Mast3R",
+                "type": "Method",
+                "properties": {}
+            },
+            {
+                "id": "Clip",
+                "type": "Model",
+                "properties": {}
+            },
+            {
+                "id": "Sam",
+                "type": "Model",
+                "properties": {}
+            },
+            {
+                "id": "Gaussian Splatting",
+                "type": "Representation",
+                "properties": {}
+            },
+            {
+                "id": "Davis Dataset",
+                "type": "Dataset",
+                "properties": {}
+            },
+            {
+                "id": "K-Means",
+                "type": "Algorithm",
+                "properties": {}
+            }
+        ],
+        "relationships": [
+            {
+                "source": {
+                    "id": "Mastsam",
+                    "type": "Method",
+                    "properties": {}
+                },
+                "target": {
+                    "id": "Mast3R",
+                    "type": "Method",
+                    "properties": {}
+                },
+                "type": "USES",
+                "properties": {}
+            },
+            {
+                "source": {
+                    "id": "Mastsam",
+                    "type": "Method",
+                    "properties": {}
+                },
+                "target": {
+                    "id": "Sam",
+                    "type": "Model",
+                    "properties": {}
+                },
+                "type": "USES",
+                "properties": {}
+            },
+            {
+                "source": {
+                    "id": "Mast3R",
+                    "type": "Method",
+                    "properties": {}
+                },
+                "target": {
+                    "id": "Points Tracker",
+                    "type": "Method",
+                    "properties": {}
+                },
+                "type": "INTERACTS_WITH",
+                "properties": {}
+            },
+            {
+                "source": {
+                    "id": "Sam",
+                    "type": "Model",
+                    "properties": {}
+                },
+                "target": {
+                    "id": "Points Tracker",
+                    "type": "Method",
+                    "properties": {}
+                },
+                "type": "INTERACTS_WITH",
+                "properties": {}
+            },
+            {
+                "source": {
+                    "id": "Mastsam",
+                    "type": "Method",
+                    "properties": {}
+                },
+                "target": {
+                    "id": "Davis Dataset",
+                    "type": "Dataset",
+                    "properties": {}
+                },
+                "type": "UTILIZES",
+                "properties": {}
+            },
+            {
+                "source": {
+                    "id": "Points Tracker",
+                    "type": "Method",
+                    "properties": {}
+                },
+                "target": {
+                    "id": "K-Means",
+                    "type": "Algorithm",
+                    "properties": {}
+                },
+                "type": "USES",
+                "properties": {}
+            },
+            {
+                "source": {
+                    "id": "Sam",
+                    "type": "Model",
+                    "properties": {}
+                },
+                "target": {
+                    "id": "Clip",
+                    "type": "Model",
+                    "properties": {}
+                },
+                "type": "COMPARED_WITH",
+                "properties": {}
+            },
+            {
+                "source": {
+                    "id": "Mastsam",
+                    "type": "Method",
+                    "properties": {}
+                },
+                "target": {
+                    "id": "Gaussian Splatting",
+                    "type": "Representation",
+                    "properties": {}
+                },
+                "type": "LEVERAGES",
+                "properties": {}
+            }
+        ],
+        "source": {
+            "id": null,
+            "metadata": {},
+            "page_content": "Abstract—\nAbstract\nWith the emerging importance of understanding 3D environ-\nments, such as spatial intelligence and 3D foundation models,\nresearchers have sought to distill knowledge from off-the-shelf\n2D foundation models such as CLIP and SAM. However, these\n2D foundation models often produce inconsistent information\nacross different views. To tackle this issue, we present MastSAM.\nThis method leverages Mast3R’s ability to map 2D pixel coor-\ndinates from image pairs into a shared 3D space. By doing so,\nMastSAM enables consistent tracking of corresponding points\nacross multiple views so that 2D foundation models such as\nSAM can output multi-view-consistent segmentation. Our main\ncontributions are as follows: 1) Clearly defining the multi-view\ninconsistency problem in 2D foundation models. 2) Proposing a\nnovel solution to minimize the multi-view inconsistency problem\nusing MastSAM.\nIndex Terms—component, formatting, style, styling, insert\nI. Introduction\nIntroduction\nRecent advances in 2D foundation models such as CLIP\nand SAM have greatly simplified traditional 2D vision tasks.\nMeanwhile, 3D awareness, perception, and understanding have\nemerged as central areas of focus in computer vision. Several\nworks have tried to combine 3D information with 2D em-\nbedding to attain more precise information about 2D images.\n[?]However, several challenges arise in 3D, with data scarcity\nanddiversity beingat theforefront. Comparedwith 2Dimages,\n3D data are more difficult to collect. Although large-scale\noutdoor scene datasets [?], indoor scene datasets [?], [?],\nobject-level datasets [?], [?], and part-level datasets [?] suffice\nfor demonstration-level experiments, they still lack generality\nfor open-vocabulary settings. Furthermore, the diversity of 3D\nrepresentations such as meshes, point clouds, and occupancy\ngridsmakes itdifficultto deviseauniversal modelarchitecture.\nA common approach is to distill information from 2D\nfoundation models (e.g., CLIP or SAM) into 3D. Early work\nby [?] uses a radiance-field representation to learn language\nembeddings for each patch, while [ ?] distills knowledge\nfrom [?] to achieve 3D-aware segmentation. However, due to\nlimitations of radiance fields’ implicit representations, direct\n3D manipulation is not possible. Instead, one must instead\nrender images back to 2D to produce language embeddings\nand segmentation masks. With the emergence of Gaussian\nSplatting [?]—an explicit and compact representation—several\nworks[?],[?],[?]have demonstratedthat lifting2D knowledge\ninto 3D can significantly improve 3D perception.\nDespite these developments, multi-view inconsistency re-\nmainsamajorchallenge.AsshowninFig. ??,suchinconsisten-\ncies occur in both object-level and scene-level segmentation,\nultimately causing semantic corruption in 3D. For example\nin Fig.?? (a), the bear’s nose, eyes, and feet are segmented\nseparately in one view, but merged into a single mask in an-\nother. This issue is also evident in simpler video segmentation\ntasks where SAM often fails to maintain consistent masks\nacross adjacent frames, leading to increasing errors with larger\nviewpoint changes. Fig.?? shows two adjacent frames from the\nDavis dataset [?]—used here as inputs for both our MastSAM\nmodel and the original SAM model [?].\nTo address this, we formally define the multi-view in-\nconsistency problem and propose a baseline solution. Our\nmethod, MastSAM, leverages Mast3R [?] to establish point-\nto-point correspondences. We initialize masks using SAM’s\nAuto-Mask-Generator by selecting representative points from\neach mask. We then track these points in subsequent frames\naccording to Mast3R’s guidance. During this procedure, we it-\neratively introduce new masks in previously unmasked regions.\nAsshowninFig. ??,MastSAMeffectivelymitigatesmulti-view\ninconsistency. Our key contributions are threefold:\n• Formal Definition:We formally define multi-view incon-\nsistency in 3D segmentation.\n• New Metric:We propose a novel metric to quantitatively\nmeasure multi-view consistency.\n• MastSAM Algorithm: We present MastSAM and\ndemonstrateitsupper-boundperformanceontheproposed\nmetric.\nIn the following sections, we will first define the prob-\nlem and introduce related work. Then we will introduce\nour method, show metrics, and evaluate both qualitative and\nquantitative experiment results.\nII. Methods\nMethods\nOur method consists of three main components: MASt3R,\nSAM,andthePointsTracker.Thesemodulesinteractwitheach\nother in a sequence designed to ensure multi-view consistency\nand produce accurate, dynamically adjusted segmentation\nmasks across all image frames.\nA. Input and Pre-processing\nThe input comprises of sequential image pairs drawn from\na multi-frame dataset, such as [?] [?], which is representative\nof typical video. This approach can be easily adapted to\n[?] and other 3D scan datasets. Each pair is structured for\nsimultaneous processing by two pipelines. One pipeline is\naimed at correspondence detection by MASt3R and the other\npipeline is focused on mask consistency produced by SAM. It\nis significant to note that the dataset is processed for uniform\nresolution and aligned using intrinsic and extrinsic camera\nparameters for efficient downstream processing.\nB. MASt3R for Points Correspondence\nMASt3R takes each input image pair and identifies sparse,\nbut accurate correspondences across frames. It leverages fea-\nture extraction through transformer-based models and cross-\nimage attention mechanisms. Features between images are\naligned, matching scores are computed, and correspondences\nare filtered based on confidence thresholds. These correspon-\ndence points are one of the two essential inputs for initializing\nthe Points Tracker.\nMASt3R outputs correspondence maps, which are then\nfurther refined by combining reciprocal matches, ensuring\npoint consistency.\nC. SAM for Mask Consistency\nSimultaneously, the SAM module processes each image\nframe in the image sequence to generate segmentation masks.\nThis allows SAM to adapt the segmentation task to produce\nconsistent masks for regions of interest in the image sequence.\nSAM accounts for the dynamic nature of the sequence by\nintegrating initial masks and point maps provided by the Points\nTracker in subsequent iterations. This feedback loop ensures\nthat the masks are constantly evolving with the updated tracked\npoints.\nD. Points Tracker for Multi-view Refinement\nThe Points Tracker serves as the critical intermediary for\nensuring multi-view consistency and accurate propagation of\nmasks across the sequence. Its core components include:\n• Overlapping Filtering: The Points Tracker module ap-\nplies a post-processing step to remove overlapping masks\nusing geometric constraints and consistency checks, en-\nsuring each segment remains well-defined and unique.\n• Representative Selection:Correspondence points identi-\nfied by MASt3R are refined through clustering (K-Means)\nand confidence filtering to select representative points for\nmulti-view alignment.\n• Unmasked Region Initialization: Regions outside the\ninitial mask coverage are dynamically identified and ini-\ntialized, ensuring that new regions entering the view are\nincorporated. This step is crucial to ensure we have an\nequilibrium in the number of input and output masks,\nespecially after the Overlapping Filtering step reducing\nthe number of masks in the module.\nThese steps optimize camera parameters, 3D depth maps,\nand point alignments iteratively to ensure robust multi-view\nconsistency.\nE. Pipeline Integration\nThe outputs from the MASt3R and SAM modules feed into\nthe Points Tracker, which generate refined masks which are\nthen re-inputted into SAM. This iterative process allows for\nfeedback-driven mask updates, with MASt3R ensuring that\ntracked points maintain temporally and spatially consistent.\nLeveraging the synergy between segmentation and correspon-\ndence tracking, this pipeline effectively addresses challenges\nin dynamic multi-view sequences.\nThe final output is a set of consistently aligned segmentation\nmasks and a reconstructed 3D point cloud for the scene. These\noutputs enable robust segmentation and analysis of multi-view\ndynamic datasets.",
+            "type": "Document"
+        }
+    }
+]

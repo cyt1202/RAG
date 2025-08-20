@@ -1,0 +1,174 @@
+{
+  "nodes": [
+    {
+      "id": "MastSAM",
+      "type": "Method"
+    },
+    {
+      "id": "2D foundation models",
+      "type": "Concept"
+    },
+    {
+      "id": "multi-view inconsistency problem",
+      "type": "Problem"
+    },
+    {
+      "id": "Mast3R",
+      "type": "Method"
+    },
+    {
+      "id": "SAM",
+      "type": "Method"
+    },
+    {
+      "id": "2D pixel coordinates",
+      "type": "Data"
+    },
+    {
+      "id": "shared 3D space",
+      "type": "Concept"
+    },
+    {
+      "id": "corresponding points",
+      "type": "Data"
+    },
+    {
+      "id": "multi-view-consistent segmentation",
+      "type": "Concept"
+    },
+    {
+      "id": "CLIP",
+      "type": "Method"
+    },
+    {
+      "id": "Points Tracker",
+      "type": "Component"
+    },
+    {
+      "id": "point-to-point correspondences",
+      "type": "Data"
+    },
+    {
+      "id": "segmentation masks",
+      "type": "Data"
+    },
+    {
+      "id": "Davis dataset",
+      "type": "Dataset"
+    },
+    {
+      "id": "Overlapping Filtering",
+      "type": "Process"
+    },
+    {
+      "id": "Representative Selection",
+      "type": "Process"
+    },
+    {
+      "id": "Unmasked Region Initialization",
+      "type": "Process"
+    }
+  ],
+  "relationships": [
+    {
+      "source": "MastSAM",
+      "target": "multi-view inconsistency problem",
+      "type": "PROPOSES_SOLUTION_FOR"
+    },
+    {
+      "source": "MastSAM",
+      "target": "Mast3R",
+      "type": "LEVERAGES"
+    },
+    {
+      "source": "MastSAM",
+      "target": "SAM",
+      "type": "USES_MODEL"
+    },
+    {
+      "source": "MastSAM",
+      "target": "multi-view-consistent segmentation",
+      "type": "ENABLES"
+    },
+    {
+      "source": "MastSAM",
+      "target": "Points Tracker",
+      "type": "HAS_COMPONENT"
+    },
+    {
+      "source": "Mast3R",
+      "target": "2D pixel coordinates",
+      "type": "MAPS_FROM"
+    },
+    {
+      "source": "Mast3R",
+      "target": "shared 3D space",
+      "type": "MAPS_TO"
+    },
+    {
+      "source": "Mast3R",
+      "target": "point-to-point correspondences",
+      "type": "ESTABLISHES"
+    },
+    {
+      "source": "SAM",
+      "target": "segmentation masks",
+      "type": "PRODUCES"
+    },
+    {
+      "source": "SAM",
+      "target": "multi-view inconsistency problem",
+      "type": "EXHIBITS"
+    },
+    {
+      "source": "2D foundation models",
+      "target": "multi-view inconsistency problem",
+      "type": "HAVE_PROBLEM"
+    },
+    {
+      "source": "2D foundation models",
+      "target": "CLIP",
+      "type": "INCLUDES"
+    },
+    {
+      "source": "2D foundation models",
+      "target": "SAM",
+      "type": "INCLUDES"
+    },
+    {
+      "source": "Points Tracker",
+      "target": "Mast3R",
+      "type": "RECEIVES_INPUT_FROM"
+    },
+    {
+      "source": "Points Tracker",
+      "target": "SAM",
+      "type": "RECEIVES_INPUT_FROM"
+    },
+    {
+      "source": "Points Tracker",
+      "target": "SAM",
+      "type": "REINPUTS_TO"
+    },
+    {
+      "source": "Points Tracker",
+      "target": "Overlapping Filtering",
+      "type": "PERFORMS"
+    },
+    {
+      "source": "Points Tracker",
+      "target": "Representative Selection",
+      "type": "PERFORMS"
+    },
+    {
+      "source": "Points Tracker",
+      "target": "Unmasked Region Initialization",
+      "type": "PERFORMS"
+    },
+    {
+      "source": "MastSAM",
+      "target": "Davis dataset",
+      "type": "TESTED_ON"
+    }
+  ]
+}

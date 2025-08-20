@@ -1,0 +1,276 @@
+########################################################################################################################################
+##############################################################  query: What is ChronoMirror: ####################################################
+########################################################################################################################################
+                            切分方式：
+==============================  easy：===============================
+--- 相关片段 1 ---
+
+内容: ChronoMirror consists of a handle with a scanning function, a signal-receiving and transmitting master control chip, and a display capable of mirror reflection and augmented reality (AR) overlay, as shown in Figure 2. The working mechanism is shown
+
+--- 相关片段 2 ---
+
+内容: To address the gap in hair color prediction and design, an AI-based mirror called ChronoMirror is introduced. ChronoMirror can take you on a time tour. Your past and future versions can be obtained by sliding the time slot. As shown in Figure 1,
+
+--- 相关片段 3 ---
+
+内容: By using ChronoMirror, you can traverse time and unlock your hair beauty.
+
+ ============================  Qwen   =======================================
+--- Word检索结果 ---
+
+--- 相关片段 1 ---
+
+内容: ChronoMirror:
+
+--- 相关片段 2 ---
+
+内容: ChronoMirror can take you on a time tour.
+
+--- 相关片段 3 ---
+
+内容: ChronoMirror consists of a handle with a scanning function, a signal-receiving and transmitting master control chip, and a display capable of mirror reflection and augmented reality (AR) overlay, as shown in Figure 2.
+
+============================== chonky ===========================================
+
+
+--- 相关片段 1 ---
+
+内容:
+
+ChronoMirror consists of a handle with a scanning function, a signal-receiving and transmitting master 
+control chip, and a display capable of mirror reflection and augmented reality (AR) overlay, 
+as shown in Figure 2. The working mechanism is shown in Figure 3.
+
+--- 相关片段 2 ---
+
+内容:                           Figure 3.
+
+To address the gap in hair color prediction and design, an AI-based mirror called ChronoMirror 
+is introduced. ChronoMirror can take you on a time tour. Your past and future versions can be obtained 
+by sliding the time slot. As shown in Figure 1, past hair version and condition, current recommended hair
+care plan, and future hair color prediction will be shown on the screen, determined by the position of the 
+time slot.
+
+--- 相关片段 3 ---
+
+内容:
+
+
+
+Benefits:
+
+ChronoMirror is a technology-based, user-friendly product that provides personalized predictions
+ and recommendations in hair care. It is data-driven, giving more scientific results than experienced-driven 
+ solutions. It focuses on personalized analysis, which is more precise than conventional solutions. 
+ By continuously collecting multi-temporal hair data, it quantifies hair health metrics and stores hair images. 
+ Thanks to ChronoMirror, users can easily track the difference in hair color and quality.
+
+================================ splitter =============================================
+--- 相关片段 1 ---
+
+内容: page_content='ChronoMirror consists of a handle with a scanning function, a signal-receiving 
+and transmitting master control chip, and a display capable of mirror reflection and augmented reality 
+(AR) overlay, as shown in Figure 2. The working mechanism is shown in Figure 3. ChronoMirror takes the 
+scanning data and the user’s ideal hair color as data inputs. User can use the handle to scan their hair. 
+The handle is integrated with K-Scan, a smart camera that uses UV, Cross-polarized, and White LED light to
+reveal the microscopic features, subsurface redness and irritation, etc. (L’Oréal, 2022). 
+The input data are then uploaded to our server by Wi-Fi 6.'   
+
+--- 相关片段 2 ---
+
+内容: page_content='Mirror &
+
+Smart Screen
+
+K-Scan
+
+Master control chip
+
+Time slot
+
+Mirror &
+
+Smart Screen
+
+K-Scan
+
+Master control chip
+
+Time slotFigure 2.                          Figure 3.
+
+To address the gap in hair color prediction and design, an AI-based mirror
+called ChronoMirror is introduced. ChronoMirror can take you on a time tour. 
+Your past and future versions can be obtained by sliding the time slot. 
+As shown in Figure 1, past hair version and condition, current recommended hair care plan, 
+and future hair color prediction will be shown on the screen, determined by the position of the time slot.'
+
+--- 相关片段 3 ---
+
+内容: page_content='After collaborating with 5 Aveda salons for real-world testing and 
+making necessary adjustments, we will proceed with mass production through Foxconn's 
+manufacturing facilities, which offer more competitive pricing.
+
+Cost:
+
+The costs for each component are shown as follows:
+
+
+
+Conclusion:
+
+In conclusion, given the sizeable hair-dying population and the 
+currently unprecise prediction and recommendation issues, ChronoMirror is introduced. 
+It uses advanced algorithms and AI tools to predict hair color fading trends and recommend 
+suitable hair care products according to personal data. The result of ChronoMirror is more scientific
+and precise, and the design philosophy gives users more sustainable hair beauty solutions. By using
+ChronoMirror, you can traverse time and unlock your hair beauty.'
+
+########################################################################################################################################
+##############################################################  query: What is ICE: ####################################################
+########################################################################################################################################
+
+================================== easy ======================================
+--- 检索结果 ---
+
+--- 相关片段 1 ---
+
+内容: for the hole course with mutil-files. Our application ICE, developed in C++, is faster in performance speed. It also supports
+customizing users' workspace and manage their own files.
+Significance
+The significance of our project lies in its user-centered design, optimizing resource search, convenient file-exchanging
+process, and question resolution. It dramatically simplifies students' learning journeys and conserves their time. Students
+
+来源页码: 0
+
+--- 相关片段 2 ---
+
+内容: questions, or discuss them in messaging apps like Slack or WeChat. Such reliance on multiple applications significantly
+increases the complexity of the study.
+Goal
+To save students' time and enhance their learning experiences, we propose an all-in-one learning application ICE :
+Intelligent Course notes Executive. It will have the following features:
+(1) comprehensive course search and management
+(2) resources sharing and downloading
+
+来源页码: 0
+
+--- 相关片段 3 ---
+
+内容: ICE: Intelligent Course notes Executive
+CSC3002 Group Project
+Baicheng Chen, Danyang Chen, Shuhan Zhang, Weiqi Mao,  Yuetong Chen
+1. Introduction
+Motivation
+In recent years, students have relied heavily on various software tools to study. For example, they have to download
+materials from platforms like BlackBoard, take notes using applications like Goodnotes, ask Chat GPT school-related
+
+
+============================= Qwen ================================
+--- 相关片段 1 ---
+
+内容: Welcome to ICE
+
+--- 相关片段 2 ---
+
+内容: Our application ICE, developed in C++, is faster in performance speed.
+
+--- 相关片段 3 ---
+
+内容: ICE: Intelligent Course notes Executive
+
+============================ chonky ==================================
+--- 相关片段 1 ---
+
+内容:
+In recent years, students have relied heavily on various software tools to study. For example, they have to download
+materials from platforms like BlackBoard, take notes using applications like Goodnotes, ask Chat GPT school-related
+questions, or discuss them in messaging apps like Slack or WeChat. Such reliance on multiple applications significantly
+increases the complexity of the study.
+Goal
+To save students' time and enhance their learning experiences, we propose an all-in-one learning application ICE :
+Intelligent Course notes Executive. It will have the following features:
+(1) comprehensive course search and management
+(2) resources sharing and downloading
+(3) a chat room supporting text, likes and dislikes interactions
+(4) AI assistant
+Limitations of related work
+While numerous educational websites and applications are available, most focus on distinct features. What's more, few all-
+in-on applications cater to the diverse needs of students. Although the Chinese University of Hong Kong, Shenzhen, has
+proposed "Fries Artificial Intelligence" with similar goals to ours, it is unstable and may encounter issues such as failing to
+load files or the AI being unable to function properly. What's more, "Fries Artificial Intelligence"'s ai, chatgpt 4o, can only
+one file at one time, while our ai support reading mutilple files and giving respond to them, facilitating generating answer
+for the hole course with mutil-files. Our application ICE, developed in C++, is faster in performance speed. It also supports
+customizing users' workspace and manage their own files.
+
+--- 相关片段 2 ---
+
+内容:
+Welcome to ICE
+password:user name:
+Log inRegister
+void getUser(const QString& username, const QString& password);void initUser(const QString& username, const QString& password);
+void publicFile(const QString& username,                 const QString& filename);void privateFile(const QString& username,                 const QString& filename); void deleteFileSearch(string filename); void delete_file(std::string workspaceName,                   std::string fileName);
+……Download
+string loadPublicFile(const QString& filename);
+Upload file
+
+--- 相关片段 3 ---
+
+内容: ICE: Intelligent Course notes Executive
+CSC3002 Group Project
+Baicheng Chen, Danyang Chen, Shuhan Zhang, Weiqi Mao,  Yuetong Chen
+1. Introduction
+Motivation
+
+============================= splitter =======================================
+--- 相关片段 1 ---
+
+内容: page_content='ICE: Intelligent Course notes Executive
+CSC3002 Group Project
+Baicheng Chen, Danyang Chen, Shuhan Zhang, Weiqi Mao,  Yuetong Chen
+1. Introduction
+Motivation
+In recent years, students have relied heavily on various software tools to study. For example, they have to download
+materials from platforms like BlackBoard, take notes using applications like Goodnotes, ask Chat GPT school-related
+questions, or discuss them in messaging apps like Slack or WeChat. Such reliance on multiple applications significantly
+increases the complexity of the study.
+Goal
+To save students' time and enhance their learning experiences, we propose an all-in-one learning application ICE :
+Intelligent Course notes Executive. It will have the following features:
+(1) comprehensive course search and management
+(2) resources sharing and downloading
+(3) a chat room supporting text, likes and dislikes interactions
+(4) AI assistant
+Limitations of related work'
+
+--- 相关片段 2 ---
+
+内容: page_content='While numerous educational websites and applications are available, most focus on distinct features. What's more, few all-
+in-on applications cater to the diverse needs of students. Although the Chinese University of Hong Kong, Shenzhen, has
+proposed "Fries Artificial Intelligence" with similar goals to ours, it is unstable and may encounter issues such as failing to       
+load files or the AI being unable to function properly. What's more, "Fries Artificial Intelligence"'s ai, chatgpt 4o, can only       
+one file at one time, while our ai support reading mutilple files and giving respond to them, facilitating generating answer
+for the hole course with mutil-files. Our application ICE, developed in C++, is faster in performance speed. It also supports
+customizing users' workspace and manage their own files.
+Significance
+The significance of our project lies in its user-centered design, optimizing resource search, convenient file-exchanging'
+
+--- 相关片段 3 ---
+
+内容: page_content='process, and question resolution. It dramatically simplifies students' learning journeys and conserves their time. Students
+will no longer need to toggle between multiple websites to acquire knowledge. Our application will become an intelligent
+companion in the academic process, making learning more accessible and enjoyable for all students.
+1 / 14
+2. Related Work
+1. Fries Artificial Intelligence
+Fries Artificial Intelligence is a website that focuses on helping students at the Chinese University of Hong Kong,
+Shenzhen, to read PPT. It uses AI to translate every PPT to help the students to understand it. However, it does not
+support creating your workspace and managing related files. It can only search on a course basis, while our
+project supports searching for file names and adding those files into the users' workspace for a specific subject.
+Our project and Fries Artificial Intelligence are both all-in-one study platforms. Fries Artificial Intelligence'
+
+
+正在从 'vector_db/faiss_word_index' 加载向量数据库...
+正在执行相似性搜索，查询: 'What is Chronomirror'
+--- 检索耗时: 0.57 秒 ---
+

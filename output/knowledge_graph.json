@@ -1,0 +1,231 @@
+[
+    {
+        "nodes": [
+            {
+                "id": "埃隆·马斯克",
+                "type": "Person",
+                "properties": {}
+            },
+            {
+                "id": "南非",
+                "type": "Location",
+                "properties": {}
+            },
+            {
+                "id": "Spacex",
+                "type": "Organization",
+                "properties": {}
+            },
+            {
+                "id": "特斯拉",
+                "type": "Organization",
+                "properties": {}
+            },
+            {
+                "id": "The Boring Company",
+                "type": "Organization",
+                "properties": {}
+            },
+            {
+                "id": "X Corp.",
+                "type": "Organization",
+                "properties": {}
+            },
+            {
+                "id": "美国德克萨斯州奥斯汀",
+                "type": "Location",
+                "properties": {}
+            }
+        ],
+        "relationships": [
+            {
+                "source": {
+                    "id": "埃隆·马斯克",
+                    "type": "Person",
+                    "properties": {}
+                },
+                "target": {
+                    "id": "南非",
+                    "type": "Location",
+                    "properties": {}
+                },
+                "type": "BORN_IN",
+                "properties": {}
+            },
+            {
+                "source": {
+                    "id": "埃隆·马斯克",
+                    "type": "Person",
+                    "properties": {}
+                },
+                "target": {
+                    "id": "Spacex",
+                    "type": "Organization",
+                    "properties": {}
+                },
+                "type": "FOUNDER",
+                "properties": {}
+            },
+            {
+                "source": {
+                    "id": "埃隆·马斯克",
+                    "type": "Person",
+                    "properties": {}
+                },
+                "target": {
+                    "id": "Spacex",
+                    "type": "Organization",
+                    "properties": {}
+                },
+                "type": "CEO",
+                "properties": {}
+            },
+            {
+                "source": {
+                    "id": "埃隆·马斯克",
+                    "type": "Person",
+                    "properties": {}
+                },
+                "target": {
+                    "id": "Spacex",
+                    "type": "Organization",
+                    "properties": {}
+                },
+                "type": "CHIEF_ENGINEER",
+                "properties": {}
+            },
+            {
+                "source": {
+                    "id": "埃隆·马斯克",
+                    "type": "Person",
+                    "properties": {}
+                },
+                "target": {
+                    "id": "特斯拉",
+                    "type": "Organization",
+                    "properties": {}
+                },
+                "type": "CEO",
+                "properties": {}
+            },
+            {
+                "source": {
+                    "id": "埃隆·马斯克",
+                    "type": "Person",
+                    "properties": {}
+                },
+                "target": {
+                    "id": "特斯拉",
+                    "type": "Organization",
+                    "properties": {}
+                },
+                "type": "PRODUCT_ARCHITECT",
+                "properties": {}
+            },
+            {
+                "source": {
+                    "id": "埃隆·马斯克",
+                    "type": "Person",
+                    "properties": {}
+                },
+                "target": {
+                    "id": "The Boring Company",
+                    "type": "Organization",
+                    "properties": {}
+                },
+                "type": "FOUNDER",
+                "properties": {}
+            },
+            {
+                "source": {
+                    "id": "埃隆·马斯克",
+                    "type": "Person",
+                    "properties": {}
+                },
+                "target": {
+                    "id": "X Corp.",
+                    "type": "Organization",
+                    "properties": {}
+                },
+                "type": "OWNER",
+                "properties": {}
+            },
+            {
+                "source": {
+                    "id": "埃隆·马斯克",
+                    "type": "Person",
+                    "properties": {}
+                },
+                "target": {
+                    "id": "X Corp.",
+                    "type": "Organization",
+                    "properties": {}
+                },
+                "type": "CTO",
+                "properties": {}
+            },
+            {
+                "source": {
+                    "id": "特斯拉",
+                    "type": "Organization",
+                    "properties": {}
+                },
+                "target": {
+                    "id": "美国德克萨斯州奥斯汀",
+                    "type": "Location",
+                    "properties": {}
+                },
+                "type": "HEADQUARTERS",
+                "properties": {}
+            },
+            {
+                "source": {
+                    "id": "特斯拉",
+                    "type": "Organization",
+                    "properties": {}
+                },
+                "target": {
+                    "id": "电动汽车",
+                    "type": "Product",
+                    "properties": {}
+                },
+                "type": "PRODUCES",
+                "properties": {}
+            },
+            {
+                "source": {
+                    "id": "特斯拉",
+                    "type": "Organization",
+                    "properties": {}
+                },
+                "target": {
+                    "id": "太阳能电池板",
+                    "type": "Product",
+                    "properties": {}
+                },
+                "type": "PRODUCES",
+                "properties": {}
+            },
+            {
+                "source": {
+                    "id": "特斯拉",
+                    "type": "Organization",
+                    "properties": {}
+                },
+                "target": {
+                    "id": "储能设备",
+                    "type": "Product",
+                    "properties": {}
+                },
+                "type": "PRODUCES",
+                "properties": {}
+            }
+        ],
+        "source": {
+            "id": null,
+            "metadata": {},
+            "page_content": "\n埃隆·马斯克，出生于南非，是一位企业家和商业巨头。\n他是SpaceX的创始人、首席执行官兼首席工程师；也是特斯拉的首席执行官和产品架构师；\n同时，他还是The Boring Company的创始人；以及X Corp.的所有者兼首席技术官。\n特斯拉公司总部位于美国德克萨斯州奥斯汀，专门生产电动汽车、太阳能电池板以及储能设备。\n",
+            "type": "Document"
+        }
+    }
+]

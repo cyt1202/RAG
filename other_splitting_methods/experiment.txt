@@ -1,0 +1,784 @@
+ [Chonky Splitter] 
+Query(PDF): Explain the method of MastSAM 
+Query(Word): What is Chronomirror 
+Model: Qwen/Qwen3-Embedding-0.6B 
+正在初始化 Chonky ParagraphSplitter...
+ParagraphSplitter 初始化完成。
+
+正在初始化用于FAISS的 LangChain Qwen 嵌入模型...
+
+--- 开始处理文件: input/sample.docx ---
+错误: 文件未找到: input/sample.docx
+
+警告: 未找到Word文件 'input/sample.docx'，跳过Word处理。
+
+正在从 'vector_db/faiss_pdf_chonky_index' 加载向量数据库...
+正在执行相似性搜索，查询: 'Explain the method of MastSAM'
+--- 检索耗时: 0.33 秒 ---
+--- 相关片段 1 ---
+
+内容: 
+Extending to potential applications of MastSAM, future
+work can explore how to deploy our method in real-time
+and on mobile devices.
+
+--- 相关片段 2 ---
+
+内容:  (c) Results of the original
+SAM: The figure shows SAM’s outputs on the two frames. Same-colored
+regions share the same mask ID. SAM fails to consistently match objects
+across views, splitting or merging them differently in each frame. (d) Results
+of MastSAM: Our MastSAM method assigns the same mask ID (color) to
+the same object across frames, effectively correlating masks across different
+views.
+
+--- 相关片段 3 ---
+
+内容: 
+2) Visualization Results: As shown in Fig.4 Fig.5, our
+method is qualitatively much better compared to BYOCL.
+MastSAM is capable of segmenting consistent and complete
+masks while BYOCL suffers from mask confusion and fails to
+get satisfactory segmentation results.
+
+ 
+[Sentence Splitter] 
+Query(PDF): Explain the method of MastSAM 
+Query(Word): What is Chronomirror 
+Model: Qwen/Qwen3-Embedding-0.6B 
+
+警告: 未找到Word文件 'input/sample.docx'，跳过Word处理。
+
+正在从 'vector_db/faiss_pdf_splitter_index' 加载向量数据库...
+正在执行相似性搜索，查询: 'Explain the method of MastSAM'
+--- 检索耗时: 0.37 秒 ---
+--- 相关片段 1 ---
+
+内容: generate situation, we import a counter measure by iteratively
+segmenting unsegmented areas using the original SAM model.
+This way, we stabilize the number of segmentation masks. Our
+ablation study shown in Tab.II displays our assumption clearly.
+VI. Future Work
+We proposed an innovative method, MastSAM, to address
+the multi-view inconsistency problem inherent in 2D founda-
+tion models. Our experimental results demonstrate promising
+performance on benchmark video segmentation datasets like
+the DAVIS dataset. However, future work should expand the
+evaluation of MastSAM across diverse datasets. This includes
+not only dynamic video sequences, but also static multi-view
+scenarios that cover both indoor and outdoor scenes (such
+as those provided by ScanNet [3], ScanNet++ [4], or other
+3D indoor datasets. This expanded evaluation will not only
+validate MastSAM’s versatility but may reveal further areas
+for development.
+MastSAM’s approach unlocks numerous promising research
+
+--- 相关片段 2 ---
+
+内容: marks demonstrates MastSAM’s capability for robust multi-
+view analysis. These results reinforce MastSAM’s value as
+a powerful tool for improving consistent segmentation, sug-
+gesting promising applications across diverse domains such as
+augmented reality, virtual reality, robotics, and other indus-
+tries.
+However, our current framework has limitations, each pro-
+viding clear avenues for future improvements: (1) While
+MastSAM provides strong empirical results, further rigorous
+experiments on diverse benchmarks are needed to general-
+ize its efficacy; (2) The computational complexity of our
+pipeline necessitates task-specific adaptations for downstream
+applications, which may limit plug-and-play usability. (3) Our
+experiments focus on video sequences, leaving open questions
+about performance in static multi-view settings (e.g., ScanNet,
+indoor scenes).
+Future work will directly address these challenges by opti-
+mizing computational efficiency and broadening MastSAM’s
+
+--- 相关片段 3 ---
+
+内容: multi-view consistent segmentation. Simplifying MastSAM’s
+architecture and developing a lightweight variation along with
+developments in foundation models would bring us closer to
+this goal.
+Another promising direction for the future of MastSAM is
+incorporating a human-in-the-loop approach [30]. Having this
+approach could improve segmentation accuracy and flexibility.
+Applications in professional fields, such as medical imaging
+or industrial inspections, that often require a high degree of
+precision may especially benefit from having a human-in-
+the-loop. Moreover, this may enable adaptive learning within
+MastSAM, which could progressively improve performance
+based on human experience and feedback. This approach
+may bridge the gap between fully automated segmentation
+with discrepancies and enhance the day-to-day tasks of many
+industry professionals.
+Moreover, further research can explore integrating the Mast-
+SAM framework with cross-modal approaches. For example,
+
+ 
+[Easy Splitter] 
+Query(PDF): Explain the method of MastSAM 
+Query(Word): What is Chronomirror 
+Model: Qwen/Qwen3-Embedding-0.6B 
+
+警告: 未找到Word文件 'input/sample.docx'，跳过Word处理。
+
+正在从 'vector_db/faiss_pdf_easy_index' 加载向量数据库...
+正在执行相似性搜索，查询: 'Explain the method of MastSAM'
+--- 检索耗时: 0.36 秒 ---
+--- 相关片段 1 ---
+
+内容: MastSAM. This method leverages Mast3R’s ability to map 2D
+pixel coordinates from image pairs into a shared 3D space. By
+doing so, MastSAM enables consistent tracking of corresponding
+points across multiple views so that 2D foundation models such as
+SAM can output multi-view-consistent segmentation. Our main
+contributions are as follows: 1) Clearly defining the multi-view
+inconsistency problem in 2D foundation models. 2) Proposing a
+novel solution to minimize the multi-view inconsistency problem
+using MastSAM.
+Index Terms—component, formatting, style, styling, insert
+I. Introduction
+Recent advances in 2D foundation models such as CLIP
+and SAM have greatly simplified traditional 2D vision tasks.
+Meanwhile, 3D awareness, perception, and understanding have
+emerged as central areas of focus in computer vision. Several
+works have tried to combine 3D information with 2D em-
+bedding to attain more precise information about 2D images.
+[1]However, several challenges arise in 3D, with data scarcity
+
+--- 相关片段 2 ---
+
+内容: this goal.
+Another promising direction for the future of MastSAM is
+incorporating a human-in-the-loop approach [30]. Having this
+approach could improve segmentation accuracy and flexibility.
+Applications in professional fields, such as medical imaging
+or industrial inspections, that often require a high degree of
+precision may especially benefit from having a human-in-
+the-loop. Moreover, this may enable adaptive learning within
+MastSAM, which could progressively improve performance
+based on human experience and feedback. This approach
+may bridge the gap between fully automated segmentation
+with discrepancies and enhance the day-to-day tasks of many
+industry professionals.
+Moreover, further research can explore integrating the Mast-
+SAM framework with cross-modal approaches. For example,
+employing segmentation outputs with depth maps or LiDAR
+data could facilitate consistency and robustness in 3D re-
+construction. Cross-modal fusion would not only reinforce
+
+--- 相关片段 3 ---
+
+内容: marks demonstrates MastSAM’s capability for robust multi-
+view analysis. These results reinforce MastSAM’s value as
+a powerful tool for improving consistent segmentation, sug-
+gesting promising applications across diverse domains such as
+augmented reality, virtual reality, robotics, and other indus-
+tries.
+However, our current framework has limitations, each pro-
+viding clear avenues for future improvements: (1) While
+MastSAM provides strong empirical results, further rigorous
+experiments on diverse benchmarks are needed to general-
+ize its efficacy; (2) The computational complexity of our
+pipeline necessitates task-specific adaptations for downstream
+applications, which may limit plug-and-play usability. (3) Our
+experiments focus on video sequences, leaving open questions
+about performance in static multi-view settings (e.g., ScanNet,
+indoor scenes).
+Future work will directly address these challenges by opti-
+mizing computational efficiency and broadening MastSAM’s
+
+[Chonky Splitter] 
+Query(PDF): What is MastSAM 
+Query(Word): What is Chronomirror 
+Model: Qwen/Qwen3-Embedding-0.6B 
+正在初始化 Chonky ParagraphSplitter...
+ParagraphSplitter 初始化完成。
+
+正在初始化用于FAISS的 LangChain Qwen 嵌入模型...
+
+--- 开始处理文件: input/sample.docx ---
+错误: 文件未找到: input/sample.docx
+
+警告: 未找到Word文件 'input/sample.docx'，跳过Word处理。
+
+正在从 'vector_db/faiss_pdf_chonky_index' 加载向量数据库...
+正在执行相似性搜索，查询: 'What is MastSAM'
+--- 检索耗时: 0.36 秒 ---
+--- 相关片段 1 ---
+
+内容: 
+Extending to potential applications of MastSAM, future
+work can explore how to deploy our method in real-time
+and on mobile devices.
+
+--- 相关片段 2 ---
+
+内容:  (c) Results of the original
+SAM: The figure shows SAM’s outputs on the two frames. Same-colored
+regions share the same mask ID. SAM fails to consistently match objects
+across views, splitting or merging them differently in each frame. (d) Results
+of MastSAM: Our MastSAM method assigns the same mask ID (color) to
+the same object across frames, effectively correlating masks across different
+views.
+
+--- 相关片段 3 ---
+
+内容: 
+MastSAM’s approach unlocks numerous promising research
+directions and practical applications. More concretely, the
+conceptual framework that forms the basis of MastSAM can
+be adapted to additional 2D and 3D foundation models beyond
+just SAM [10], such as DINOv2 [29] and Segment Anything
+Model 2 [25]. By combining MastSAM’s ability to correlate
+multi-view representations with recent advancements in foun-
+dation models, future research can achieve greater accuracy,
+efficiency, and versatility.
+
+ 
+[Sentence Splitter] 
+Query(PDF): What is MastSAM 
+Query(Word): What is Chronomirror 
+Model: Qwen/Qwen3-Embedding-0.6B 
+
+警告: 未找到Word文件 'input/sample.docx'，跳过Word处理。
+
+正在从 'vector_db/faiss_pdf_splitter_index' 加载向量数据库...
+正在执行相似性搜索，查询: 'What is MastSAM'
+--- 检索耗时: 0.33 秒 ---
+--- 相关片段 1 ---
+
+内容: generate situation, we import a counter measure by iteratively
+segmenting unsegmented areas using the original SAM model.
+This way, we stabilize the number of segmentation masks. Our
+ablation study shown in Tab.II displays our assumption clearly.
+VI. Future Work
+We proposed an innovative method, MastSAM, to address
+the multi-view inconsistency problem inherent in 2D founda-
+tion models. Our experimental results demonstrate promising
+performance on benchmark video segmentation datasets like
+the DAVIS dataset. However, future work should expand the
+evaluation of MastSAM across diverse datasets. This includes
+not only dynamic video sequences, but also static multi-view
+scenarios that cover both indoor and outdoor scenes (such
+as those provided by ScanNet [3], ScanNet++ [4], or other
+3D indoor datasets. This expanded evaluation will not only
+validate MastSAM’s versatility but may reveal further areas
+for development.
+MastSAM’s approach unlocks numerous promising research
+
+--- 相关片段 2 ---
+
+内容: marks demonstrates MastSAM’s capability for robust multi-
+view analysis. These results reinforce MastSAM’s value as
+a powerful tool for improving consistent segmentation, sug-
+gesting promising applications across diverse domains such as
+augmented reality, virtual reality, robotics, and other indus-
+tries.
+However, our current framework has limitations, each pro-
+viding clear avenues for future improvements: (1) While
+MastSAM provides strong empirical results, further rigorous
+experiments on diverse benchmarks are needed to general-
+ize its efficacy; (2) The computational complexity of our
+pipeline necessitates task-specific adaptations for downstream
+applications, which may limit plug-and-play usability. (3) Our
+experiments focus on video sequences, leaving open questions
+about performance in static multi-view settings (e.g., ScanNet,
+indoor scenes).
+Future work will directly address these challenges by opti-
+mizing computational efficiency and broadening MastSAM’s
+
+--- 相关片段 3 ---
+
+内容: multi-view consistent segmentation. Simplifying MastSAM’s
+architecture and developing a lightweight variation along with
+developments in foundation models would bring us closer to
+this goal.
+Another promising direction for the future of MastSAM is
+incorporating a human-in-the-loop approach [30]. Having this
+approach could improve segmentation accuracy and flexibility.
+Applications in professional fields, such as medical imaging
+or industrial inspections, that often require a high degree of
+precision may especially benefit from having a human-in-
+the-loop. Moreover, this may enable adaptive learning within
+MastSAM, which could progressively improve performance
+based on human experience and feedback. This approach
+may bridge the gap between fully automated segmentation
+with discrepancies and enhance the day-to-day tasks of many
+industry professionals.
+Moreover, further research can explore integrating the Mast-
+SAM framework with cross-modal approaches. For example,
+
+ 
+[Easy Splitter] 
+Query(PDF): What is MastSAM 
+Query(Word): What is Chronomirror 
+Model: Qwen/Qwen3-Embedding-0.6B 
+
+警告: 未找到Word文件 'input/sample.docx'，跳过Word处理。
+
+正在从 'vector_db/faiss_pdf_easy_index' 加载向量数据库...
+正在执行相似性搜索，查询: 'What is MastSAM'
+--- 检索耗时: 0.21 秒 ---
+--- 相关片段 1 ---
+
+内容: MastSAM. This method leverages Mast3R’s ability to map 2D
+pixel coordinates from image pairs into a shared 3D space. By
+doing so, MastSAM enables consistent tracking of corresponding
+points across multiple views so that 2D foundation models such as
+SAM can output multi-view-consistent segmentation. Our main
+contributions are as follows: 1) Clearly defining the multi-view
+inconsistency problem in 2D foundation models. 2) Proposing a
+novel solution to minimize the multi-view inconsistency problem
+using MastSAM.
+Index Terms—component, formatting, style, styling, insert
+I. Introduction
+Recent advances in 2D foundation models such as CLIP
+and SAM have greatly simplified traditional 2D vision tasks.
+Meanwhile, 3D awareness, perception, and understanding have
+emerged as central areas of focus in computer vision. Several
+works have tried to combine 3D information with 2D em-
+bedding to attain more precise information about 2D images.
+[1]However, several challenges arise in 3D, with data scarcity
+
+--- 相关片段 2 ---
+
+内容: this goal.
+Another promising direction for the future of MastSAM is
+incorporating a human-in-the-loop approach [30]. Having this
+approach could improve segmentation accuracy and flexibility.
+Applications in professional fields, such as medical imaging
+or industrial inspections, that often require a high degree of
+precision may especially benefit from having a human-in-
+the-loop. Moreover, this may enable adaptive learning within
+MastSAM, which could progressively improve performance
+based on human experience and feedback. This approach
+may bridge the gap between fully automated segmentation
+with discrepancies and enhance the day-to-day tasks of many
+industry professionals.
+Moreover, further research can explore integrating the Mast-
+SAM framework with cross-modal approaches. For example,
+employing segmentation outputs with depth maps or LiDAR
+data could facilitate consistency and robustness in 3D re-
+construction. Cross-modal fusion would not only reinforce
+
+--- 相关片段 3 ---
+
+内容: marks demonstrates MastSAM’s capability for robust multi-
+view analysis. These results reinforce MastSAM’s value as
+a powerful tool for improving consistent segmentation, sug-
+gesting promising applications across diverse domains such as
+augmented reality, virtual reality, robotics, and other indus-
+tries.
+However, our current framework has limitations, each pro-
+viding clear avenues for future improvements: (1) While
+MastSAM provides strong empirical results, further rigorous
+experiments on diverse benchmarks are needed to general-
+ize its efficacy; (2) The computational complexity of our
+pipeline necessitates task-specific adaptations for downstream
+applications, which may limit plug-and-play usability. (3) Our
+experiments focus on video sequences, leaving open questions
+about performance in static multi-view settings (e.g., ScanNet,
+indoor scenes).
+Future work will directly address these challenges by opti-
+mizing computational efficiency and broadening MastSAM’s
+
+[Chonky Splitter] 
+Query(PDF): How is the experiment done 
+Query(Word): What is Chronomirror 
+Model: Qwen/Qwen3-Embedding-0.6B 
+正在初始化 Chonky ParagraphSplitter...
+ParagraphSplitter 初始化完成。
+
+正在初始化用于FAISS的 LangChain Qwen 嵌入模型...
+
+--- 开始处理文件: input/sample.docx ---
+错误: 文件未找到: input/sample.docx
+
+警告: 未找到Word文件 'input/sample.docx'，跳过Word处理。
+
+正在从 'vector_db/faiss_pdf_chonky_index' 加载向量数据库...
+正在执行相似性搜索，查询: 'How is the experiment done'
+--- 检索耗时: 0.25 秒 ---
+--- 相关片段 1 ---
+
+内容: 
+B. Experiment Results
+
+--- 相关片段 2 ---
+
+内容: 
+The final output is a set of consistently aligned segmentation
+masks and a reconstructed 3D point cloud for the scene. These
+outputs enable robust segmentation and analysis of multi-view
+dynamic datasets.
+V. Experiment and Results
+A. Introduction to Experiment
+To extensively evaluate MastSAM, we performed experi-
+ments on two open-source datasets: the Davis benchmark [15]
+and Mose.
+The ground truth annotation in both datasets only refer to
+one mask of the major object, whereas MastSAM automati-
+cally outputs an image, possessing masks of every object. This
+discrepancy made direct comparisons between MastSAM and
+the ground truth annotations impractical. To address this, we
+developed the following evaluation protocol to ensure a com-
+prehensive and fair assessment of MastSAM’s performance.
+
+--- 相关片段 3 ---
+
+内容: 6. Notice
+thatthemulti-viewconsistencyisusedtomeasurethepowerof
+a model instead of measuring the dataset we use. Therefore, we
+currently regard functionF as a perfect function that outputs
+accurate 3D coordinates.
+
+ 
+[Sentence Splitter] 
+Query(PDF): How is the experiment done 
+Query(Word): What is Chronomirror 
+Model: Qwen/Qwen3-Embedding-0.6B 
+
+警告: 未找到Word文件 'input/sample.docx'，跳过Word处理。
+
+正在从 'vector_db/faiss_pdf_splitter_index' 加载向量数据库...
+正在执行相似性搜索，查询: 'How is the experiment done'
+--- 检索耗时: 0.42 秒 ---
+--- 相关片段 1 ---
+
+内容: practical viability through experimentation and evaluation
+across various 3D datasets and settings. Moreover, additional
+promising directions include integrating advanced foundation
+models and adopting human-in-the-loop methods for enhanced
+precision and adaptability. By pursuing these future paths,
+MastSAM can evolve and generalize to real world applications,
+bringing practical impact in day-to-day tasks.
+References
+[1] M. Xiao, R. Chen, H. Luo, F. Zhao, F. Wu, H. Xiong, X. Ma, and
+J. Wang, “Map-free visual relocalization enhanced by instance knowl-
+edge and depth knowledge,” inICASSP 2025 - 2025 IEEE International
+Conference on Acoustics, Speech and Signal Processing (ICASSP), 2025,
+pp. 1–5.
+[2] B. Xiong, N. Zheng, and Z. Li, “Gauu-scene v2: Expanse lidar image
+dataset shows unreliable geometric reconstruction using gaussian splat-
+ting and nerf,”arXiv preprint arXiv:2404.04880, 2024.
+[3] A. Dai, A. X. Chang, M. Savva, M. Halber, T. Funkhouser, and
+
+--- 相关片段 2 ---
+
+内容: The ground truth annotation in both datasets only refer to
+one mask of the major object, whereas MastSAM automati-
+cally outputs an image, possessing masks of every object. This
+discrepancy made direct comparisons between MastSAM and
+the ground truth annotations impractical. To address this, we
+developed the following evaluation protocol to ensure a com-
+prehensive and fair assessment of MastSAM’s performance.
+• Ground Truth Replication: We replicated the ground
+truth (GT) annotation for each annotation image as many
+times as the number of masks generated by MastSAM.
+• Best Mask Selection: For each predicted mask, we
+calculated the Intersection over Union (IoU) with the
+corresponding GT annotations. The mask with the highest
+IoU value among all predicted masks for each image was
+selected.
+• Metrics Computation: Using the best mask for each
+image, we computed the following evaluation metrics:
+IoU, F1 score, precision, and recall. These metrics col-
+lectively offer a comprehensive evaluation of the regional
+
+--- 相关片段 3 ---
+
+内容: Fig. 5. Here, we propose more comparisons regarding the segmentation result instead of the complexity result. However, our major focus in the current paper
+is on how to solve the consistency problem, and the downstream task result should be the secondary consideration
+2) Visualization Results: As shown in Fig.4 Fig.5, our
+method is qualitatively much better compared to BYOCL.
+MastSAM is capable of segmenting consistent and complete
+masks while BYOCL suffers from mask confusion and fails to
+get satisfactory segmentation results.
+C. Ablation
+TABLE II
+Ablation Between No Unmasked Region Initialization and Full
+Capacity
+Method IoU F1 Precision Recall
+Ours w/o initialization 0.3678 0.4211 0.5682 0.3780
+Ours 0.4553 0.5228 0.5226 0.5988
+In this part, we show the essence of our design logic. Due
+to our method’s nature of expanding masks, it will lose its
+ability to segment a meaningful result. This is due to the fact
+all masks will aggregate into one result. To prevent this de-
+
+ 
+[Easy Splitter] 
+Query(PDF): How is the experiment done 
+Query(Word): What is Chronomirror 
+Model: Qwen/Qwen3-Embedding-0.6B 
+
+警告: 未找到Word文件 'input/sample.docx'，跳过Word处理。
+
+正在从 'vector_db/faiss_pdf_easy_index' 加载向量数据库...
+正在执行相似性搜索，查询: 'How is the experiment done'
+--- 检索耗时: 0.32 秒 ---
+--- 相关片段 1 ---
+
+内容: masks and a reconstructed 3D point cloud for the scene. These
+outputs enable robust segmentation and analysis of multi-view
+dynamic datasets.
+V. Experiment and Results
+A. Introduction to Experiment
+To extensively evaluate MastSAM, we performed experi-
+ments on two open-source datasets: the Davis benchmark [15]
+and Mose.
+The ground truth annotation in both datasets only refer to
+one mask of the major object, whereas MastSAM automati-
+cally outputs an image, possessing masks of every object. This
+discrepancy made direct comparisons between MastSAM and
+the ground truth annotations impractical. To address this, we
+developed the following evaluation protocol to ensure a com-
+prehensive and fair assessment of MastSAM’s performance.
+• Ground Truth Replication: We replicated the ground
+truth (GT) annotation for each annotation image as many
+times as the number of masks generated by MastSAM.
+• Best Mask Selection: For each predicted mask, we
+calculated the Intersection over Union (IoU) with the
+
+--- 相关片段 2 ---
+
+内容: i.e. Pw → R. Its specific definition is shown in Equ.6. Notice
+thatthemulti-viewconsistencyisusedtomeasurethepowerof
+a model instead of measuring the dataset we use. Therefore, we
+currently regard functionF as a perfect function that outputs
+accurate 3D coordinates.
+
+--- 相关片段 3 ---
+
+内容: location in 3D space. For each pixel, we then calculate the
+cosine similarity with the input pixel. Finally, the weighted
+average is the result of the consistency score of that pixel
+using a current 2D foundation modelM.
+Although the above metrics would be reliable and accurate
+to measure multi-view inconsistency, it would be practically
+impossible to calculate the metrics due to computational
+complexity. Therefore, an easier approximation may vary
+from a different down-stream task. The aforementioned multi-
+view inconsistency measurement metrics poses several issues,
+especially when using the metrics as a loss function. This
+is known as the degeneration problem. When all outputs of
+a model become the same, the inconsistency becomes zero,
+but the original function of the model is lost. Therefore, it
+would be unreasonable to use these metrics. They should be
+used in conjunction with other downstream tasks, such as
+segmentation accuracy. In the experiment section, we will
+
+[Chonky Splitter] 
+Query(PDF): Why does the author choose Mast3r 
+Query(Word): What is Chronomirror 
+Model: Qwen/Qwen3-Embedding-0.6B 
+正在初始化 Chonky ParagraphSplitter...
+ParagraphSplitter 初始化完成。
+
+正在初始化用于FAISS的 LangChain Qwen 嵌入模型...
+
+--- 开始处理文件: input/sample.docx ---
+错误: 文件未找到: input/sample.docx
+
+警告: 未找到Word文件 'input/sample.docx'，跳过Word处理。
+
+正在从 'vector_db/faiss_pdf_chonky_index' 加载向量数据库...
+正在执行相似性搜索，查询: 'Why does the author choose Mast3r'
+--- 检索耗时: 0.37 秒 ---
+--- 相关片段 1 ---
+
+内容: 
+B. MASt3R for Points Correspondence
+MASt3R takes each input image pair and identifies sparse,
+but accurate correspondences across frames. It leverages fea-
+ture extraction through transformer-based models and cross-
+image attention mechanisms. Features between images are
+aligned, matching scores are computed, and correspondences
+are filtered based on confidence thresholds. These correspon-
+dence points are one of the two essential inputs for initializing
+the Points Tracker.
+MASt3R outputs correspondence maps, which are then
+further refined by combining reciprocal matches, ensuring
+point consistency.
+
+--- 相关片段 2 ---
+
+内容: 
+• Representative Selection:Correspondence points identi-
+fied by MASt3R are refined through clustering (K-Means)
+and confidence filtering to select representative points for
+multi-view alignment.
+
+--- 相关片段 3 ---
+
+内容:  Methods
+Our method consists of three main components: MASt3R,
+SAM,andthePointsTracker.Thesemodulesinteractwitheach
+other in a sequence designed to ensure multi-view consistency
+and produce accurate, dynamically adjusted segmentation
+masks across all image frames.
+
+ 
+[Sentence Splitter] 
+Query(PDF): Why does the author choose Mast3r 
+Query(Word): What is Chronomirror 
+Model: Qwen/Qwen3-Embedding-0.6B 
+
+警告: 未找到Word文件 'input/sample.docx'，跳过Word处理。
+
+正在从 'vector_db/faiss_pdf_splitter_index' 加载向量数据库...
+正在执行相似性搜索，查询: 'Why does the author choose Mast3r'
+--- 检索耗时: 0.33 秒 ---
+--- 相关片段 1 ---
+
+内容: Our method consists of three main components: MASt3R,
+SAM,andthePointsTracker.Thesemodulesinteractwitheach
+other in a sequence designed to ensure multi-view consistency
+and produce accurate, dynamically adjusted segmentation
+masks across all image frames.
+A. Input and Pre-processing
+The input comprises of sequential image pairs drawn from
+a multi-frame dataset, such as [15] [3], which is representative
+of typical video. This approach can be easily adapted to
+[4] and other 3D scan datasets. Each pair is structured for
+simultaneous processing by two pipelines. One pipeline is
+aimed at correspondence detection by MASt3R and the other
+pipeline is focused on mask consistency produced by SAM. It
+is significant to note that the dataset is processed for uniform
+resolution and aligned using intrinsic and extrinsic camera
+parameters for efficient downstream processing.
+B. MASt3R for Points Correspondence
+MASt3R takes each input image pair and identifies sparse,
+
+--- 相关片段 2 ---
+
+内容: MastSAM: Solving Multi-view Inconsistency
+Segmentation by Sequence Matched 3D Coordinates
+Yuetong Chen1,†, Yihan Fang1,†, Yunya Wang1,†, Jiayue Dai1,†, Kenneth Xu2,†, Butian Xiong3,*
+{yuetongchen,yihanfang,yunyawang,jiayuedai}@link.cuhk.edu.cn; kennethx@umich.edu; butianxi@usc.edu
+1The Chinese University of Hong Kong, Shenzhen, Shenzhen, China
+2University of Michigan, Ann Arbor, USA
+3University of Southern California, Los Angeles, USA
+Abstract—With the emerging importance of understanding 3D
+environments, such as spatial intelligence and 3D foundation
+models, researchers have sought to distill knowledge from off-the-
+shelf 2D foundation models such as CLIP and SAM. However,
+these 2D foundation models often produce inconsistent infor-
+mation across different views. To tackle this issue, we present
+MastSAM. This method leverages Mast3R’s ability to map 2D
+pixel coordinates from image pairs into a shared 3D space. By
+doing so, MastSAM enables consistent tracking of corresponding
+
+--- 相关片段 3 ---
+
+内容: These steps optimize camera parameters, 3D depth maps,
+and point alignments iteratively to ensure robust multi-view
+consistency.
+E. Pipeline Integration
+The outputs from the MASt3R and SAM modules feed into
+the Points Tracker, which generate refined masks which are
+then re-inputted into SAM. This iterative process allows for
+feedback-driven mask updates, with MASt3R ensuring that
+tracked points maintain temporally and spatially consistent.
+Leveraging the synergy between segmentation and correspon-
+dence tracking, this pipeline effectively addresses challenges
+in dynamic multi-view sequences.
+The final output is a set of consistently aligned segmentation
+masks and a reconstructed 3D point cloud for the scene. These
+outputs enable robust segmentation and analysis of multi-view
+dynamic datasets.
+V. Experiment and Results
+A. Introduction to Experiment
+To extensively evaluate MastSAM, we performed experi-
+ments on two open-source datasets: the Davis benchmark [15]
+and Mose.
+
+ 
+[Easy Splitter] 
+Query(PDF): Why does the author choose Mast3r 
+Query(Word): What is Chronomirror 
+Model: Qwen/Qwen3-Embedding-0.6B 
+
+警告: 未找到Word文件 'input/sample.docx'，跳过Word处理。
+
+正在从 'vector_db/faiss_pdf_easy_index' 加载向量数据库...
+正在执行相似性搜索，查询: 'Why does the author choose Mast3r'
+--- 检索耗时: 0.29 秒 ---
+--- 相关片段 1 ---
+
+内容: MastSAM. This method leverages Mast3R’s ability to map 2D
+pixel coordinates from image pairs into a shared 3D space. By
+doing so, MastSAM enables consistent tracking of corresponding
+points across multiple views so that 2D foundation models such as
+SAM can output multi-view-consistent segmentation. Our main
+contributions are as follows: 1) Clearly defining the multi-view
+inconsistency problem in 2D foundation models. 2) Proposing a
+novel solution to minimize the multi-view inconsistency problem
+using MastSAM.
+Index Terms—component, formatting, style, styling, insert
+I. Introduction
+Recent advances in 2D foundation models such as CLIP
+and SAM have greatly simplified traditional 2D vision tasks.
+Meanwhile, 3D awareness, perception, and understanding have
+emerged as central areas of focus in computer vision. Several
+works have tried to combine 3D information with 2D em-
+bedding to attain more precise information about 2D images.
+[1]However, several challenges arise in 3D, with data scarcity
+
+--- 相关片段 2 ---
+
+内容: MASt3R
+SAM
+Image Sequence Initial Masks
+Overlapping Filtering
+Tracked Points
+Output: Consistent Mask
+Input: Image Pairs
+。
+。
+。
+。
+。
+。
+1
+2
+n-1 n
+3
+2
+Image Pair
+Points Correspondence
+Representative Selection
+Points Prompt
+Points Tracker
+Unmasked Region 
+Initialization
+Fig. 3. Overview of our approach. Given a pair of image sequences, one sequence is input to SAM, and an image pair is input to MASt3R. SAM produces a set
+of image masks, which the Prompt Points Tracker processes. The output of MASt3R is a set of correspondence points, which is also input to the Prompt Points
+Tracker. The Prompt Points Tracker applies overlapping filtering, decreasing the number of masks. The Point Tracker then initializes the unmasked regions,
+increasing the number of masks back to dynamic equilibrium from the previous step, and selects representative points to ensure multi-view consistency. Each
+
+--- 相关片段 3 ---
+
+内容: according to Mast3R’s guidance. During this procedure, we it-
+eratively introduce new masks in previously unmasked regions.
+As shown in Fig.1, MastSAM effectively mitigates multi-view
+inconsistency. Our key contributions are threefold:
+• Formal Definition:We formally define multi-view incon-
+sistency in 3D segmentation.
+• New Metric:We propose a novel metric to quantitatively
+measure multi-view consistency.
+• MastSAM Algorithm: We present MastSAM and
+demonstrateitsupper-boundperformanceontheproposed
+metric.
+In the following sections, we will first define the prob-
+lem and introduce related work. Then we will introduce
+our method, show metrics, and evaluate both qualitative and
+quantitative experiment results.
+II. Multi-view Inconsistency
+In this section, we formally define the multi-view incon-
+sistency problem. We start with an intuitive explanation, and
+then a mathematical definition. As the name suggests, there
+are several 2D images where the information corresponding
+

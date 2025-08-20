@@ -1,0 +1,273 @@
+--- Chunk 1 ---
+ChronoMirror:
+
+Transverse Time, Unlock Hair Beauty
+
+
+
+
+
+
+
+            Course: ENG2002S
+
+            Assignment: Technical proposal
+
+            Name: Yuetong Chen
+
+            Student ID: 123090050
+
+            Class No.: L21
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+ChronoMirror: Traverse time, unlock hair beauty
+
+	Background:
+
+--- Chunk 2 ---
+
+
+	Nowadays, more and more people tend to change their hair color. About 75% of American and 60% of Japanese and Korean women have dyed their hair(Prinzi, 2023; 新安全,2013). According to Region and Segment Forecasts, the global market size for hair color spray was approximately USD 2.23 billion in 2023 and is expected to expand at a compound annual growth rate (CAGR) of 5.3% between 2024 and 2030.
+
+--- Chunk 3 ---
+ Most hair-dying people suffer from two problems: unpredictable fading color issues. And damaged hair. 70% of hair dye users claimed that the original color only lasts for a short period and the hair color afterward is unsatisfactory (book118,2024-a)—60% experience dry hair and cuticle damage (book118,2024-b). Given the sizeable hair-dying population and the growing market, it is promising to invent innovative hair-dying-related products to solve the above two issues.
+
+--- Chunk 4 ---
+
+
+
+
+Problem: 
+
+Most hair-color-related products, like Matrix, Style My Hair Pro, and L’Oréal Professional, focus only on virtual try-ons, simulating the initial dyed color to help users select their favorite color. (L’Oréal, n.d.; L’Oréal, 2021; L’Oréal Professionnel Virtual Try-On, n
+
+--- Chunk 5 ---
+.d.).
+
+--- Chunk 6 ---
+ However, selecting an initial dyed color is not a sustainable hair beauty solution. The faded color differs from the freshly dyed version and often lasts longer. Therefore, for those who care about their long-term hair beauty, predicting and designing future hair colors rather than only focusing on the freshly dyed color is essential. Unfortunately, there are few solutions to predict the future hair color, let alone designing it.
+
+--- Chunk 7 ---
+ To know the appearance of the hair in the future, hair dye users can only search online forums to see others' color-fading processes. However, this approach is experience-based, and the results differ between individuals due to hair quality and care variations. It is hard to tell which color-fading trend suits you by only seeing those pictures. Therefore, this method is not personalized and cannot predict the hair’s future precisely. Moreover, the fading color can be changed by using different Color-fixing products. Unfortunately, the use of color-fixing products to change into some specific color remains ambiguous.
+
+--- Chunk 8 ---
+
+
+
+
+Solution: 
+
+Figure 1.
+
+
+
+Mirror & 
+
+Smart Screen
+
+K-Scan
+
+Master control chip
+
+Time slot
+
+Mirror & 
+
+Smart Screen
+
+K-Scan
+
+Master control chip
+
+Time slotFigure 2.
+
+--- Chunk 9 ---
+                          Figure 3.
+
+	To address the gap in hair color prediction and design, an AI-based mirror called ChronoMirror is introduced. ChronoMirror can take you on a time tour. Your past and future versions can be obtained by sliding the time slot. As shown in Figure 1, past hair version and condition, current recommended hair care plan, and future hair color prediction will be shown on the screen, determined by the position of the time slot.
+
+--- Chunk 10 ---
+
+
+ChronoMirror consists of a handle with a scanning function, a signal-receiving and transmitting master control chip, and a display capable of mirror reflection and augmented reality (AR) overlay, as shown in Figure 2. The working mechanism is shown in Figure 3.
+
+--- Chunk 11 ---
+ ChronoMirror takes the scanning data and the user’s ideal hair color as data inputs. User can use the handle to scan their hair. The handle is integrated with K-Scan, a smart camera that uses UV, Cross-polarized, and White LED light to reveal the microscopic features, subsurface redness and irritation, etc. (L’Oréal, 2022). The input data are then uploaded to our server by Wi-Fi 6. 
+
+The server will first use the K-Scan algorithm, trained by more than 12,000 images, to evaluate the hair condition. K-Scan analyzes hair quality by multispectral imaging and microscopic magnification to assess cuticle integrity, scalp oil levels, hair diameter, and pigment distribution. Then, the hair condition result is stored in a personalized database. Further evaluation will be processed by two separate systems: (1) a recommendation algorithm and (2) the Temporal convolutional network (TCN). According to the data and target color, the recommendation algorithm will generate suitable hair care products. This algorithm is based on a Content filtering algorithm, which utilizes user-specific hair attributes (e.g., porosity, moisture level, fading pattern) and uses machine learning to predict and recommend optimal hair care products (NVIDIA,2025)
+
+--- Chunk 12 ---
+. On the other hand, TCN, trained by L’Oréal Fade Laboratory Database, analyzes time-series hair data, such as initial dye composition, environmental exposure, and user habits, to forecast color fading trends (Bai et al., 2018). By stacking residual blocks with exponential dilation rates, TCN captures long-range patterns in pigment degradation, predicting future color fading through sequential nonlinear transformations.
+
+--- Chunk 13 ---
+ 
+
+
+
+Benefits:
+
+ChronoMirror is a technology-based, user-friendly product that provides personalized predictions and recommendations in hair care. It is data-driven, giving more scientific results than experienced-driven solutions. It focuses on personalized analysis, which is more precise than conventional solutions. By continuously collecting multi-temporal hair data, it quantifies hair health metrics and stores hair images. Thanks to ChronoMirror, users can easily track the difference in hair color and quality.
+
+--- Chunk 14 ---
+ Most innovatively, ChronoMirror breaks away from the industry's "one-time color selection" trend. Predicting the fading hair color helps users manage their expectations. Tracking the users’ data and adjusting hair care products according to users’ requirements ensures satisfaction even as colors fade. Transitioning from “one-time color selection” to “long-term style management” provides a more sustainable hair beauty solution.
+
+--- Chunk 15 ---
+
+
+
+
+Implementation:	
+
+The ChronoMirror implementation is structured into three phases:
+
+Hardware Prototyping (5 months)
+
+To integrate the K-Scan sensor system, we partner with Kérastase for algorithm optimization and Hamamatsu Photonics for industrial-grade sensor manufacturing. For the mirror display, we collaborate with BOE Technology, a global leader in OLED manufacturing, to develop a 1080p transparent OLED panel with AR capabilities. Local processing uses a small NVIDIA Jetson Orin Nano with cloud synchronization to AWS instances (p3.2xlarge with NVIDIA V100 GPUs) for heavy computations.
+
+--- Chunk 16 ---
+ 
+
+AI Algorithm Development (3 months)
+
+Our AI development team consists of 3 ML engineers and 1 data scientist for model tuning. They will first adjust K-Scan's and commendation algorithms to focus on hair care. Then, they will train the TCN using L’Oréal ’s data set.
+
+--- Chunk 17 ---
+ 
+
+Test & Production (4 months)
+
+After collaborating with 5 Aveda salons for real-world testing and making necessary adjustments, we will proceed with mass production through Foxconn's manufacturing facilities, which offer more competitive pricing.
+
+--- Chunk 18 ---
+
+
+Cost:
+
+The costs for each component are shown as follows:
+
+--- Chunk 19 ---
+
+
+
+
+Conclusion:
+
+	In conclusion, given the sizeable hair-dying population and the currently unprecise prediction and recommendation issues, ChronoMirror is introduced. It uses advanced algorithms and AI tools to predict hair color fading trends and recommend suitable hair care products according to personal data. The result of ChronoMirror is more scientific and precise, and the design philosophy gives users more sustainable hair beauty solutions. By using ChronoMirror, you can traverse time and unlock your hair beauty.
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+References
+
+--- Chunk 20 ---
+
+
+Bai, S., Kolter, J. Z., & Koltun, V. (2018, March 4). An empirical evaluation of generic convolutional and recurrent networks for sequence modeling. arXiv.org. https://arxiv.org/abs/1803.01271
+
+Book118.
+
+--- Chunk 21 ---
+ (2024-a).
+
+--- Chunk 22 ---
+ 2024年中国护理染发膏市场调查研究报告 [2024 China Hair Care Dye Market Research Report]. 原创力文档. https://max.book118.com/html/2024/1031/51222413320
+
+--- Chunk 23 ---
+11341.
+
+--- Chunk 24 ---
+shtm
+
+Book118. (2024-b). 染发制剂产品市场需求分析报告 [Market Demand Analysis Report on Hair Dye Formulations]. 原创力文档. https://max.
+
+--- Chunk 25 ---
+book118.com/
+
+--- Chunk 26 ---
+html/
+
+--- Chunk 27 ---
+2024/0609/702112103000
+
+--- Chunk 28 ---
+6120.
+
+--- Chunk 29 ---
+shtm
+
+--- Chunk 30 ---
+
+
+Hair Color Spray Market Size, Share & Trends Analysis Report by end-user (Male, Female, children), by distribution channel (Hypermarkets & supermarkets, convenience stores, specialty stores, online), by region, and segment forecasts, 2024 - 2030. (n.d.). https://www.grandviewresearch.com/industry-analysis/hair-color-spray-market-report
+
+--- Chunk 31 ---
+
+
+L’Oréal. (n.d.). Matrix - L’Oréal Group Professionnal Product Division. https://www.loreal.com/en/professional-products-division/matrix/
+
+L’Oréal. (2021, January 11). L’Oréal Caribe partners with Gustazos to launch e-commerce platform Gustazos Beauty. L’Oréal. https://www.loreal.com/en/articles/science-and-technology/haircolor-virtual-try-on-loreal-professionnel-style-myhair/
+
+L’Oréal. (2022, April 4). UVMune 400, our Biggest Sun Filtering Technology in 30 Years. L’Oréal. https://www.loreal.com/en/articles/science-and-technology/k-scan-kerastase/
+
+L’Oréal Professionnel Virtual Try-On. (n.d.). https://www.lorealprofessionnel.
+
+--- Chunk 32 ---
+com/virtual-try-on
+
+--- Chunk 33 ---
+
+
+Prinzi, L. (2023, November 14). Hair Facts: 56 hair color statistics, including genetics. All Things Hair United States. https://www.allthingshair.com/en-us/hair-color/hair-color-statistics/
+
+--- Chunk 34 ---
+
+
+NVIDIA. (2025). What is a recommendation system? NVIDIA Data Science Glossary. https://www.nvidia.com/en-us/glossary/recommendation-system/
+
+--- Chunk 35 ---
+
+
+新安全. (2013). 解码染发剂的潜在危害 [Decoding the Potential Hazards of Hair Dye]. 人民网. http://paper.people.com.cn/xaq/html/2013-07/01/content_1280299.htm
+

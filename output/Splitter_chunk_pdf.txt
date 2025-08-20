@@ -1,0 +1,720 @@
+--- Chunk 1 ---
+MastSAM: Solving Multi-view Inconsistency
+Segmentation by Sequence Matched 3D Coordinates
+Yuetong Chen1,†, Yihan Fang1,†, Yunya Wang1,†, Jiayue Dai1,†, Kenneth Xu2,†, Butian Xiong3,*
+{yuetongchen,yihanfang,yunyawang,jiayuedai}@link.cuhk.edu.cn; kennethx@umich.edu; butianxi@usc.edu
+1The Chinese University of Hong Kong, Shenzhen, Shenzhen, China
+2University of Michigan, Ann Arbor, USA
+3University of Southern California, Los Angeles, USA
+Abstract—With the emerging importance of understanding 3D
+environments, such as spatial intelligence and 3D foundation
+models, researchers have sought to distill knowledge from off-the-
+shelf 2D foundation models such as CLIP and SAM. However,
+these 2D foundation models often produce inconsistent infor-
+mation across different views. To tackle this issue, we present
+MastSAM. This method leverages Mast3R’s ability to map 2D
+pixel coordinates from image pairs into a shared 3D space. By
+doing so, MastSAM enables consistent tracking of corresponding
+
+--- Chunk 2 ---
+points across multiple views so that 2D foundation models such as
+SAM can output multi-view-consistent segmentation. Our main
+contributions are as follows: 1) Clearly defining the multi-view
+inconsistency problem in 2D foundation models. 2) Proposing a
+novel solution to minimize the multi-view inconsistency problem
+using MastSAM.
+Index Terms—component, formatting, style, styling, insert
+I. Introduction
+Recent advances in 2D foundation models such as CLIP
+and SAM have greatly simplified traditional 2D vision tasks.
+Meanwhile, 3D awareness, perception, and understanding have
+emerged as central areas of focus in computer vision. Several
+works have tried to combine 3D information with 2D em-
+bedding to attain more precise information about 2D images.
+[1]However, several challenges arise in 3D, with data scarcity
+anddiversity beingat theforefront. Comparedwith 2Dimages,
+3D data are more difficult to collect. Although large-scale
+outdoor scene datasets [2], indoor scene datasets [3], [4],
+
+--- Chunk 3 ---
+object-level datasets [5], [6], and part-level datasets [7] suffice
+for demonstration-level experiments, they still lack generality
+for open-vocabulary settings. Furthermore, the diversity of 3D
+representations such as meshes, point clouds, and occupancy
+gridsmakes itdifficultto deviseauniversal modelarchitecture.
+A common approach is to distill information from 2D
+foundation models (e.g., CLIP or SAM) into 3D. Early work
+by [8] uses a radiance-field representation to learn language
+embeddings for each patch, while [9] distills knowledge from
+[10] to achieve 3D-aware segmentation. However, due to
+limitations of radiance fields’ implicit representations, direct
+†Primary author(s). *Corresponding author.
+(a) SAM Multiview Inconsistency
+(b) Input Images
+(c) SAM Video Sequence Inconsistency
+(d) MastSAM (ours)  Multiview Consistent Segmentation
+Fig. 1. (a) Multi-View Inconsistency Example (b) Video Sequence Case: A
+simpler form of multi-view inconsistency appears in video sequences, where
+
+--- Chunk 4 ---
+adjacent frames exhibit small camera pose changes. (c) Results of the original
+SAM: The figure shows SAM’s outputs on the two frames. Same-colored
+regions share the same mask ID. SAM fails to consistently match objects
+across views, splitting or merging them differently in each frame. (d) Results
+of MastSAM: Our MastSAM method assigns the same mask ID (color) to
+the same object across frames, effectively correlating masks across different
+views.
+2D Foundation 
+Model
+Consistency
+Multiview Images
+3D Lifting Function
+2D Features
+General Case Video Consistent Segmentation Case
+Multiview Images
+Points Correspondence
+Segmentation Model
+Mask Feature
+Pixel Level 
+Consistency
+Fig. 2. The input of the measurement metrics are multi-view images, and a 3D lift function that can match images to 3D location, as well as the 2D foundation
+model we want to measure. The basic idea is that the output of 2D foundation model points to the same 3D location should be the same. The cross function
+
+--- Chunk 5 ---
+here calculate the average cosine similarity between output features that at the same 3D coordinates.However, in reality, it would be impossible to calculate
+pixel by pixel due to the computational burden. In current setting, we then simplify the calculation granularity from per pixel calculation to per-mask. However,
+this per-mask calculation is a good approximation to segmentation problem. We each mask from adjacent picture from aH ×W representation to a consistent
+feature representation. And calculate the feature vector’s similarity
+3D manipulation is not possible. Instead, one must instead
+renderimagesbackto2Dtoproducelanguageembeddingsand
+segmentation masks. With the emergence of Gaussian Splat-
+ting [11]—an explicit and compact representation—several
+works [12]–[14] have demonstrated that lifting 2D knowledge
+into 3D can significantly improve 3D perception.
+Despite these developments, multi-view inconsistency re-
+mains a major challenge. As shown in Fig.1, such inconsisten-
+
+--- Chunk 6 ---
+cies occur in both object-level and scene-level segmentation,
+ultimately causing semantic corruption in 3D. For example
+in Fig.1 (a), the bear’s nose, eyes, and feet are segmented
+separately in one view, but merged into a single mask in an-
+other. This issue is also evident in simpler video segmentation
+tasks where SAM often fails to maintain consistent masks
+across adjacent frames, leading to increasing errors with larger
+viewpoint changes. Fig.1 shows two adjacent frames from the
+Davis dataset [15]—used here as inputs for both our MastSAM
+model and the original SAM model [10].
+To address this, we formally define the multi-view in-
+consistency problem and propose a baseline solution. Our
+method, MastSAM, leverages Mast3R [16] to establish point-
+to-point correspondences. We initialize masks using SAM’s
+Auto-Mask-Generator by selecting representative points from
+each mask. We then track these points in subsequent frames
+according to Mast3R’s guidance. During this procedure, we it-
+
+--- Chunk 7 ---
+eratively introduce new masks in previously unmasked regions.
+As shown in Fig.1, MastSAM effectively mitigates multi-view
+inconsistency. Our key contributions are threefold:
+• Formal Definition:We formally define multi-view incon-
+sistency in 3D segmentation.
+• New Metric:We propose a novel metric to quantitatively
+measure multi-view consistency.
+• MastSAM Algorithm: We present MastSAM and
+demonstrateitsupper-boundperformanceontheproposed
+metric.
+In the following sections, we will first define the prob-
+lem and introduce related work. Then we will introduce
+our method, show metrics, and evaluate both qualitative and
+quantitative experiment results.
+II. Multi-view Inconsistency
+In this section, we formally define the multi-view incon-
+sistency problem. We start with an intuitive explanation, and
+then a mathematical definition. As the name suggests, there
+are several 2D images where the information corresponding
+to the same 3D location are inconsistent among all 2D views.
+As shown in the Fig.2.
+
+--- Chunk 8 ---
+Formally, we have an image setI, whereI = I1, I2, ...,In.
+We also define a pixel spaceP for each imagei as shown in
+Equ.1. whereWi and Hi is the width and height of imagei.
+Pi = {x, y|x ∈ 1, 2, . . . ,Wi, y ∈ 1, 2, . . . ,Hi} (1)
+We then define a functionF that generates a functionfi that
+maps pixel space to consistent coordinates space, i.e.P → R3
+as shown in Equ.3
+fi : Pi → R3, fix, y = x′, y′, z′ (2)
+F :I ×I → Pi → R3, Fi, I = fi (3)
+Given the above equation, we define the multi-view consis-
+tency functionhw as a mapping from a pixel space to a score,
+i.e. Pw → R. Its specific definition is shown in Equ.6. Notice
+thatthemulti-viewconsistencyisusedtomeasurethepowerof
+a model instead of measuring the dataset we use. Therefore, we
+currently regard functionF as a perfect function that outputs
+accurate 3D coordinates.
+MASt3R
+SAM
+Image Sequence Initial Masks
+Overlapping Filtering
+Tracked Points
+Output: Consistent Mask
+Input: Image Pairs
+。
+。
+。
+。
+。
+。
+1
+2
+n-1 n
+3
+2
+Image Pair
+Points Correspondence
+
+--- Chunk 9 ---
+Representative Selection
+Points Prompt
+Points Tracker
+Unmasked Region 
+Initialization
+Fig. 3. Overview of our approach. Given a pair of image sequences, one sequence is input to SAM, and an image pair is input to MASt3R. SAM produces a set
+of image masks, which the Prompt Points Tracker processes. The output of MASt3R is a set of correspondence points, which is also input to the Prompt Points
+Tracker. The Prompt Points Tracker applies overlapping filtering, decreasing the number of masks. The Point Tracker then initializes the unmasked regions,
+increasing the number of masks back to dynamic equilibrium from the previous step, and selects representative points to ensure multi-view consistency. Each
+group of points is then input back into SAM to produce the final segmented image, aiming to address the multi-view consistency problem. The next frame
+of masks is sent to the Points Tracker to generate consistent masks for subsequent frames.
+εwx, y = {i, j, k ∈ I ×Pi | ∥fwx, y − fi j, k∥ ≤ε} (4)
+hwx, y, M =
+
+--- Chunk 10 ---
+i, j,k∈εwx,y
+Mi j,k·Mwx,y
+∥Mi j,k∥2·∥Mwx,y∥2
+|εwx, y| (5)
+HI, M = 1
+|{I, Pi}| w,x,y∈{I,Pi}
+hwx, y, M (6)
+As demonstrated in the above equation Equ.6, we first find
+all pixels in the different images within a reasonable range to
+the input pixel on the corresponding 3D space. This reasonable
+range means that those pixels point at approximately the same
+location in 3D space. For each pixel, we then calculate the
+cosine similarity with the input pixel. Finally, the weighted
+average is the result of the consistency score of that pixel
+using a current 2D foundation modelM.
+Although the above metrics would be reliable and accurate
+to measure multi-view inconsistency, it would be practically
+impossible to calculate the metrics due to computational
+complexity. Therefore, an easier approximation may vary
+from a different down-stream task. The aforementioned multi-
+view inconsistency measurement metrics poses several issues,
+especially when using the metrics as a loss function. This
+
+--- Chunk 11 ---
+is known as the degeneration problem. When all outputs of
+a model become the same, the inconsistency becomes zero,
+but the original function of the model is lost. Therefore, it
+would be unreasonable to use these metrics. They should be
+used in conjunction with other downstream tasks, such as
+segmentation accuracy. In the experiment section, we will
+explain how an implementation of an approximation of the
+above metrics to down-stream tasks such as SAM and CLIP.
+III. Related work
+A. Image Matching
+Image matching aims to establish correspondences between
+pixels across different images of the same scene, captur-
+ing global spatial consistency. Previous works have utilized
+keypoint-based matching, connecting sparse, locally invariant
+features between images. Traditional methods, such as those
+based on epipolar geometry [17]–[19], enforce spatial con-
+straints by leveraging geometric relationships between camera
+views. Handcrafted approaches like SIFT [20], [21] achieve
+
+--- Chunk 12 ---
+image matching through robust local feature extraction. Mod-
+ern methods like SuperGlue [22] enhance image matching
+using graph-based attention, improving robustness under chal-
+lenging conditions. However, their reliance on keypoint-based
+matching limits their effectiveness in handling extreme view-
+point changes.
+In contrast, recent advances such as DUSt3R [23] and
+MASt3R [16] use dense matching, establishing correspon-
+dences for all pixels. In addition, they treat image matching
+as a 3D problem, centered around camera pose and scene
+geometry. DUSt3R redefines pairwise reconstruction as the
+regression of 3D pointmaps [23], achieving robustness to
+viewpoint and illumination changes without relying on ex-
+plicit matching supervision. Building on DUSt3R, MASt3R
+significantly improves the accuracy of pairwise matches and
+the reciprocal matching speed by adding a feature matching
+module that aligns dense local features in 3D space [16].
+By using dense matching and grounding spatial consistency
+
+--- Chunk 13 ---
+in a 3D framework, MASt3R addresses key limitations of
+traditional and modern methods, making it a robust and
+efficient solution for image-matching tasks.
+B. Image segmentation
+Segment anything (SAM) [10] is a zero shot image seg-
+mentation model that inputs points or bounding boxes and
+outputs a corresponding segmentation mask. Built on the
+Vision Transformer (ViT) architecture [24] and trained on the
+large-scale SA-1B dataset [10], SAM demonstrates remarkable
+segmentation performance for single-image tasks.
+Extending SAM’s [10] capabilities to video segmentation,
+recent approaches have emerged. SAM2 [25] introduces frame-
+by-frame segmentation using a sparse attention mechanism to
+Fig. 4. This figure compares Mast-SAM and BYOCL in different data sequences. For each data sequence, the left-most image is the original image, the
+middle image is the output of Mast-SAM, and the right-most image is the output of BYOCL. As one can see, the MastSAM can correlate previous images
+
+--- Chunk 14 ---
+and current images together. This is shown by the same color on the correlated mask. Although the BYOCL method can sometimes correlate the consistency
+well, it loses its ability to correctly segment the original mask.
+efficiently track temporal changes. While this approach adapts
+well to frame variations, it relies heavily on the quality of
+initial prompts and lacks robust mechanisms for continuity
+tracking across frames. Similarly, the Track Anything Model
+(TAM) [26] addresses the need for consistent segmentation
+by combining SAM’s high-quality segmentation with XMem’s
+[27] memory mechanism. TAM integrates SAM [10] for
+precise mask initialization and refines with XMem for semi-
+supervised video object segmentation. On the other hand,
+the matching Anything by Segment Anything (MASA) [28]
+model focuses on tracking multiple moving objects through
+bounding boxes, utilizing SAM and various data transformers
+[28]. Despite these advancements, current video segmentation
+
+--- Chunk 15 ---
+models face several limitations. Their performance tends to
+decline over time, especially during long video sequences,
+as segmentation accuracy heavily depends on the quality of
+the initialization. Poor-quality initial masks can significantly
+impair the results. Most critically, these works treat each
+frame as an independent unit, providing individually optimized
+outputs with a limited understanding of overall continuity.
+This frame-centric approach often fails to capture global
+spatial relationships, making them susceptible to challenges
+like object occlusion, rotation, or viewpoint transformation.
+To address these limitations, our work combines SAM [10]
+with MASt3R [16], leveraging MASt3R’s ability to robustly
+capture spatial continuity across frames. By grounding seg-
+mentation in a 3D perspective, our approach ensures robust
+performance even when the camera poses changes, bridging
+the gap between frame-by-frame optimization and spatially
+consistent video segmentation.
+IV. Methods
+
+--- Chunk 16 ---
+Our method consists of three main components: MASt3R,
+SAM,andthePointsTracker.Thesemodulesinteractwitheach
+other in a sequence designed to ensure multi-view consistency
+and produce accurate, dynamically adjusted segmentation
+masks across all image frames.
+A. Input and Pre-processing
+The input comprises of sequential image pairs drawn from
+a multi-frame dataset, such as [15] [3], which is representative
+of typical video. This approach can be easily adapted to
+[4] and other 3D scan datasets. Each pair is structured for
+simultaneous processing by two pipelines. One pipeline is
+aimed at correspondence detection by MASt3R and the other
+pipeline is focused on mask consistency produced by SAM. It
+is significant to note that the dataset is processed for uniform
+resolution and aligned using intrinsic and extrinsic camera
+parameters for efficient downstream processing.
+B. MASt3R for Points Correspondence
+MASt3R takes each input image pair and identifies sparse,
+
+--- Chunk 17 ---
+but accurate correspondences across frames. It leverages fea-
+ture extraction through transformer-based models and cross-
+image attention mechanisms. Features between images are
+aligned, matching scores are computed, and correspondences
+are filtered based on confidence thresholds. These correspon-
+dence points are one of the two essential inputs for initializing
+the Points Tracker.
+MASt3R outputs correspondence maps, which are then
+further refined by combining reciprocal matches, ensuring
+point consistency.
+C. SAM for Mask Consistency
+Simultaneously, the SAM module processes each image
+frame in the image sequence to generate segmentation masks.
+This allows SAM to adapt the segmentation task to produce
+consistent masks for regions of interest in the image sequence.
+SAM accounts for the dynamic nature of the sequence by
+integrating initial masks and point maps provided by the Points
+Tracker in subsequent iterations. This feedback loop ensures
+that the masks are constantly evolving with the updated tracked
+
+--- Chunk 18 ---
+points.
+D. Points Tracker for Multi-view Refinement
+The Points Tracker serves as the critical intermediary for
+ensuring multi-view consistency and accurate propagation of
+masks across the sequence. Its core components include:
+• Overlapping Filtering: The Points Tracker module ap-
+plies a post-processing step to remove overlapping masks
+using geometric constraints and consistency checks, en-
+suring each segment remains well-defined and unique.
+• Representative Selection:Correspondence points identi-
+fied by MASt3R are refined through clustering (K-Means)
+and confidence filtering to select representative points for
+multi-view alignment.
+• Unmasked Region Initialization: Regions outside the
+initial mask coverage are dynamically identified and ini-
+tialized, ensuring that new regions entering the view are
+incorporated. This step is crucial to ensure we have an
+equilibrium in the number of input and output masks,
+especially after the Overlapping Filtering step reducing
+the number of masks in the module.
+
+--- Chunk 19 ---
+These steps optimize camera parameters, 3D depth maps,
+and point alignments iteratively to ensure robust multi-view
+consistency.
+E. Pipeline Integration
+The outputs from the MASt3R and SAM modules feed into
+the Points Tracker, which generate refined masks which are
+then re-inputted into SAM. This iterative process allows for
+feedback-driven mask updates, with MASt3R ensuring that
+tracked points maintain temporally and spatially consistent.
+Leveraging the synergy between segmentation and correspon-
+dence tracking, this pipeline effectively addresses challenges
+in dynamic multi-view sequences.
+The final output is a set of consistently aligned segmentation
+masks and a reconstructed 3D point cloud for the scene. These
+outputs enable robust segmentation and analysis of multi-view
+dynamic datasets.
+V. Experiment and Results
+A. Introduction to Experiment
+To extensively evaluate MastSAM, we performed experi-
+ments on two open-source datasets: the Davis benchmark [15]
+and Mose.
+
+--- Chunk 20 ---
+The ground truth annotation in both datasets only refer to
+one mask of the major object, whereas MastSAM automati-
+cally outputs an image, possessing masks of every object. This
+discrepancy made direct comparisons between MastSAM and
+the ground truth annotations impractical. To address this, we
+developed the following evaluation protocol to ensure a com-
+prehensive and fair assessment of MastSAM’s performance.
+• Ground Truth Replication: We replicated the ground
+truth (GT) annotation for each annotation image as many
+times as the number of masks generated by MastSAM.
+• Best Mask Selection: For each predicted mask, we
+calculated the Intersection over Union (IoU) with the
+corresponding GT annotations. The mask with the highest
+IoU value among all predicted masks for each image was
+selected.
+• Metrics Computation: Using the best mask for each
+image, we computed the following evaluation metrics:
+IoU, F1 score, precision, and recall. These metrics col-
+lectively offer a comprehensive evaluation of the regional
+
+--- Chunk 21 ---
+and boundary precision of MastSAM. Here, we list the
+formula used to calculate the IoU, F1 score, precision and
+recall:
+IoU= Area
+ 
+Predicted∩Ground Truth
+
+Area
+ 
+Predicted∪Ground Truth
+
+F1 = 2× Precision×Recall
+Precision Recall
+Precision= TP
+TP FP
+Recall= TP
+TP FN
+Furthermore, we adopted the parallel evaluation method to
+facilitate running speed and GPU space. Four GPUs were used
+following the ’queue’ logic. Once a GPU was set free, a new
+unprocessed sequence would be sent to this GPU. With this
+logic, MastSAM was able to segment 100 images consistently
+within 15 minutes.
+B. Experiment Results
+1) Quantitative Results:Compared to BYOCL, our method
+demonstrates significant improvements across all metrics,
+highlighting its superior segmentation performance. Although
+the IoU and F1 scores of our method are slightly lower
+than those of SAM1, our approach achieves higher temporal
+consistency between consecutive frames, as evidenced by a
+more balanced Precision and Recall. The specific quantitative
+
+--- Chunk 22 ---
+results are shown in the tableI below:
+TABLE I
+Performance metrics of different methods on the DA VIS dataset.
+Method IoU F1 Precision Recall Consistency
+BYOCL 0.3906 0.527 0.4621 0.6671 78.73
+Ours 0.4553 0.5228 0.5226 0.5988 92.32
+SAM 0.6787 0.786 0.9891 0.6965 NA
+We did not compare our method with SAM2 because these
+two methods were different in segmenting videos. MastSAM
+segmented videos of one scene combining 3D knowledge.
+However, SAM2 simply segments and tracks a specified object
+using correspondence between frames. Although the results
+looked similar, it was unfair to compare these two methods on
+a dataset mostly containing one, monotonous view.
+These results underscore the effectiveness of our method in
+addressing segmentation consistency across frames. By lever-
+aging MastSAM’s ability to ensure multi-view consistency, our
+approach achieves a robust trade-off between accuracy and
+temporal stability, which is essential for video segmentation
+tasks.
+
+--- Chunk 23 ---
+Fig. 5. Here, we propose more comparisons regarding the segmentation result instead of the complexity result. However, our major focus in the current paper
+is on how to solve the consistency problem, and the downstream task result should be the secondary consideration
+2) Visualization Results: As shown in Fig.4 Fig.5, our
+method is qualitatively much better compared to BYOCL.
+MastSAM is capable of segmenting consistent and complete
+masks while BYOCL suffers from mask confusion and fails to
+get satisfactory segmentation results.
+C. Ablation
+TABLE II
+Ablation Between No Unmasked Region Initialization and Full
+Capacity
+Method IoU F1 Precision Recall
+Ours w/o initialization 0.3678 0.4211 0.5682 0.3780
+Ours 0.4553 0.5228 0.5226 0.5988
+In this part, we show the essence of our design logic. Due
+to our method’s nature of expanding masks, it will lose its
+ability to segment a meaningful result. This is due to the fact
+all masks will aggregate into one result. To prevent this de-
+
+--- Chunk 24 ---
+generate situation, we import a counter measure by iteratively
+segmenting unsegmented areas using the original SAM model.
+This way, we stabilize the number of segmentation masks. Our
+ablation study shown in Tab.II displays our assumption clearly.
+VI. Future Work
+We proposed an innovative method, MastSAM, to address
+the multi-view inconsistency problem inherent in 2D founda-
+tion models. Our experimental results demonstrate promising
+performance on benchmark video segmentation datasets like
+the DAVIS dataset. However, future work should expand the
+evaluation of MastSAM across diverse datasets. This includes
+not only dynamic video sequences, but also static multi-view
+scenarios that cover both indoor and outdoor scenes (such
+as those provided by ScanNet [3], ScanNet++ [4], or other
+3D indoor datasets. This expanded evaluation will not only
+validate MastSAM’s versatility but may reveal further areas
+for development.
+MastSAM’s approach unlocks numerous promising research
+
+--- Chunk 25 ---
+directions and practical applications. More concretely, the
+conceptual framework that forms the basis of MastSAM can
+be adapted to additional 2D and 3D foundation models beyond
+just SAM [10], such as DINOv2 [29] and Segment Anything
+Model 2 [25]. By combining MastSAM’s ability to correlate
+multi-view representations with recent advancements in foun-
+dation models, future research can achieve greater accuracy,
+efficiency, and versatility.
+Extending to potential applications of MastSAM, future
+work can explore how to deploy our method in real-time
+and on mobile devices. With the growing demand for ef-
+ficient and compact segmentation models in fields such as
+augmented reality, virtual reality, robotics, and mobile com-
+puting, real-time multi-view segmentation consistency would
+be revolutionary. The current limitation of MastSAM is its
+computational complexity, especially its reliance on foundation
+models. As foundational models develop, perhaps the core
+principle of MastSAM can be adapted to achieve real-time
+
+--- Chunk 26 ---
+multi-view consistent segmentation. Simplifying MastSAM’s
+architecture and developing a lightweight variation along with
+developments in foundation models would bring us closer to
+this goal.
+Another promising direction for the future of MastSAM is
+incorporating a human-in-the-loop approach [30]. Having this
+approach could improve segmentation accuracy and flexibility.
+Applications in professional fields, such as medical imaging
+or industrial inspections, that often require a high degree of
+precision may especially benefit from having a human-in-
+the-loop. Moreover, this may enable adaptive learning within
+MastSAM, which could progressively improve performance
+based on human experience and feedback. This approach
+may bridge the gap between fully automated segmentation
+with discrepancies and enhance the day-to-day tasks of many
+industry professionals.
+Moreover, further research can explore integrating the Mast-
+SAM framework with cross-modal approaches. For example,
+
+--- Chunk 27 ---
+employing segmentation outputs with depth maps or LiDAR
+data could facilitate consistency and robustness in 3D re-
+construction. Cross-modal fusion would not only reinforce
+MastSAM’s segmentation accuracy but also enable richer 3D
+scene understanding.
+By pursuing these avenues of future research, MastSAM can
+be enhanced significantly in terms of practicality, efficiency,
+accuracy, and adaptability.
+VII. Conclusion
+In this work, we formalize the concept of multi-view incon-
+sistency in 3D segmentation, addressing a significant challenge
+that current 2D foundation models face when applied across
+multiple views. To quantify this inconsistency, we propose the
+first dedicated metric explicitly designed to evaluate consis-
+tency across views.
+We introduced MastSAM, a novel algorithm tailored to
+mitigate multi-view inconsistency, achieving theoretical upper-
+bound performance on our proposed metric. Our experimental
+evaluations on established video object segmentation bench-
+
+--- Chunk 28 ---
+marks demonstrates MastSAM’s capability for robust multi-
+view analysis. These results reinforce MastSAM’s value as
+a powerful tool for improving consistent segmentation, sug-
+gesting promising applications across diverse domains such as
+augmented reality, virtual reality, robotics, and other indus-
+tries.
+However, our current framework has limitations, each pro-
+viding clear avenues for future improvements: (1) While
+MastSAM provides strong empirical results, further rigorous
+experiments on diverse benchmarks are needed to general-
+ize its efficacy; (2) The computational complexity of our
+pipeline necessitates task-specific adaptations for downstream
+applications, which may limit plug-and-play usability. (3) Our
+experiments focus on video sequences, leaving open questions
+about performance in static multi-view settings (e.g., ScanNet,
+indoor scenes).
+Future work will directly address these challenges by opti-
+mizing computational efficiency and broadening MastSAM’s
+
+--- Chunk 29 ---
+practical viability through experimentation and evaluation
+across various 3D datasets and settings. Moreover, additional
+promising directions include integrating advanced foundation
+models and adopting human-in-the-loop methods for enhanced
+precision and adaptability. By pursuing these future paths,
+MastSAM can evolve and generalize to real world applications,
+bringing practical impact in day-to-day tasks.
+References
+[1] M. Xiao, R. Chen, H. Luo, F. Zhao, F. Wu, H. Xiong, X. Ma, and
+J. Wang, “Map-free visual relocalization enhanced by instance knowl-
+edge and depth knowledge,” inICASSP 2025 - 2025 IEEE International
+Conference on Acoustics, Speech and Signal Processing (ICASSP), 2025,
+pp. 1–5.
+[2] B. Xiong, N. Zheng, and Z. Li, “Gauu-scene v2: Expanse lidar image
+dataset shows unreliable geometric reconstruction using gaussian splat-
+ting and nerf,”arXiv preprint arXiv:2404.04880, 2024.
+[3] A. Dai, A. X. Chang, M. Savva, M. Halber, T. Funkhouser, and
+
+--- Chunk 30 ---
+M. Nießner, “Scannet: Richly-annotated 3d reconstructions of indoor
+scenes,” inProceedings of the IEEE conference on computer vision and
+pattern recognition, 2017, pp. 5828–5839.
+[4] C. Yeshwanth, Y.-C. Liu, M. Nießner, and A. Dai, “Scannet++: A high-
+fidelity dataset of 3d indoor scenes,” inProceedings of the IEEE/CVF
+International Conference on Computer Vision, 2023, pp. 12–22.
+[5] M. Deitke, D. Schwenk, J. Salvador, L. Weihs, O. Michel, E. VanderBilt,
+L. Schmidt, K. Ehsani, A. Kembhavi, and A. Farhadi, “Objaverse: A
+universe of annotated 3d objects,” in Proceedings of the IEEE/CVF
+Conference on Computer Vision and Pattern Recognition, 2023, pp.
+13142–13153.
+[6] M. Xu, P. Chen, H. Liu, and X. Han, “To-scene: A large-scale dataset for
+understanding3dtabletopscenes,”in EuropeanConferenceonComputer
+Vision. Springer, 2022, pp. 340–356.
+[7] A. Delitzas, A. Takmaz, F. Tombari, R. Sumner, M. Pollefeys, and
+F. Engelmann, “Scenefun3d: Fine-grained functionality and affordance
+
+--- Chunk 31 ---
+understanding in 3d scenes,” inProceedings of the IEEE/CVF Confer-
+ence on Computer Vision and Pattern Recognition, 2024, pp. 14531–
+14542.
+[8] J. Kerr, C. M. Kim, K. Goldberg, A. Kanazawa, and M. Tancik, “Lerf:
+Language embedded radiance fields,” inProceedings of the IEEE/CVF
+International Conference on Computer Vision, 2023, pp. 19729–19739.
+[9] C. M. Kim, M. Wu, J. Kerr, K. Goldberg, M. Tancik, and A. Kanazawa,
+“Garfield: Group anything with radiance fields,” inProceedings of the
+IEEE/CVF Conference on Computer Vision and Pattern Recognition,
+2024, pp. 21530–21539.
+[10] A. Kirillov, E. Mintun, N. Ravi, H. Mao, C. Rolland, L. Gustafson,
+T. Xiao, S. Whitehead, A. C. Berg, W.-Y. Loet al., “Segment anything,”
+in Proceedings of the IEEE/CVF International Conference on Computer
+Vision, 2023, pp. 4015–4026.
+[11] B. Kerbl, G. Kopanas, T. Leimkühler, and G. Drettakis, “3d gaussian
+splatting for real-time radiance field rendering.” ACM Trans. Graph.,
+vol. 42, no. 4, pp. 139–1, 2023.
+
+--- Chunk 32 ---
+[12] B. Xiong, X. Ye, T. H. E. Tse, K. Han, S. Cui, and Z. Li, “Sa-gs:
+Semantic-aware gaussian splatting for large scene reconstruction with
+geometry constrain,”arXiv preprint arXiv:2405.16923, 2024.
+[13] J.-C. Shi, M. Wang, H.-B. Duan, and S.-H. Guan, “Language embedded
+3d gaussians for open-vocabulary scene understanding,” inProceedings
+of the IEEE/CVF Conference on Computer Vision and Pattern Recog-
+nition, 2024, pp. 5333–5343.
+[14] M. Qin, W. Li, J. Zhou, H. Wang, and H. Pfister, “Langsplat: 3d language
+gaussian splatting,” in Proceedings of the IEEE/CVF Conference on
+Computer Vision and Pattern Recognition, 2024, pp. 20051–20060.
+[15] J. Pont-Tuset, F. Perazzi, S. Caelles, P. Arbeláez, A. Sorkine-Hornung,
+and L. Van Gool, “The 2017 davis challenge on video object segmen-
+tation,” arXiv preprint arXiv:1704.00675, 2017.
+[16] V. Leroy, Y. Cabon, and J. Revaud, “Grounding image matching in 3d
+with mast3r,” inEuropean Conference on Computer Vision. Springer,
+2025, pp. 71–91.
+
+--- Chunk 33 ---
+[17] Y. Bhalgat, J. F. Henriques, and A. Zisserman, “A light touch approach
+to teaching transformers multi-view geometry,” inProceedings of the
+IEEE/CVF Conference on Computer Vision and Pattern Recognition,
+2023, pp. 4958–4969.
+[18] Y. He, R. Yan, K. Fragkiadaki, and S.-I. Yu, “Epipolar transformers,” in
+Proceedings of the ieee/cvf conference on computer vision and pattern
+recognition, 2020, pp. 7779–7788.
+[19] Q. Wang, X. Zhou, B. Hariharan, and N. Snavely, “Learning feature
+descriptors using camera pose supervision,” inComputer Vision–ECCV
+2020: 16th European Conference, Glasgow, UK, August 23–28, 2020,
+Proceedings, Part I 16. Springer, 2020, pp. 757–774.
+[20] D. G. Lowe, “Distinctive image features from scale-invariant keypoints,”
+International journal of computer vision, vol. 60, pp. 91–110, 2004.
+[21] E. Rublee, V. Rabaud, K. Konolige, and G. Bradski, “Orb: An efficient
+alternative to sift or surf,” in2011 International conference on computer
+vision. Ieee, 2011, pp. 2564–2571.
+
+--- Chunk 34 ---
+[22] P. Lindenberger, P.-E. Sarlin, and M. Pollefeys, “Lightglue: Local feature
+matching at light speed,” inProceedings of the IEEE/CVF International
+Conference on Computer Vision, 2023, pp. 17627–17638.
+[23] S. Wang, V. Leroy, Y. Cabon, B. Chidlovskii, and J. Revaud, “Dust3r:
+Geometric 3d vision made easy,” in Proceedings of the IEEE/CVF
+Conference on Computer Vision and Pattern Recognition, 2024, pp.
+20697–20709.
+[24] A. Dosovitskiy, “An image is worth 16x16 words: Transformers for
+image recognition at scale,”arXiv preprint arXiv:2010.11929, 2020.
+[25] N.Ravi,V.Gabeur,Y.-T.Hu,R.Hu,C.Ryali,T.Ma,H.Khedr,R.Rädle,
+C. Rolland, L. Gustafsonet al., “Sam 2: Segment anything in images
+and videos,”arXiv preprint arXiv:2408.00714, 2024.
+[26] J. Yang, M. Gao, Z. Li, S. Gao, F. Wang, and F. Zheng, “Track anything:
+Segment anything meets videos,” arXiv preprint arXiv:2304.11968,
+2023.
+[27] H. K. Cheng and A. G. Schwing, “Xmem: Long-term video object
+segmentation with an atkinson-shiffrin memory model,” in European
+
+--- Chunk 35 ---
+Conference on Computer Vision. Springer, 2022, pp. 640–658.
+[28] S. Li, L. Ke, M. Danelljan, L. Piccinelli, M. Segu, L. Van Gool, and
+F. Yu, “Matching anything by segmenting anything,” inProceedings of
+the IEEE/CVF Conference on Computer Vision and Pattern Recognition,
+2024, pp. 18963–18973.
+[29] M. Oquab, T. Darcet, T. Moutakanni, H. V. Vo, M. Szafraniec, V. Khali-
+dov, P. Fernandez, D. Haziza, F. Massa, A. El-Nouby, M. Assran,
+N. Ballas, W. Galuba, R. Howes, P.-Y. Huang, S.-W. Li, I. Misra,
+M. Rabbat, V. Sharma, G. Synnaeve, H. Xu, H. Jégou, J. Mairal,
+P. Labatut, A. Joulin, and P. Bojanowski, “Dinov2: Learning robust
+visual features without supervision,”arXiv preprint arXiv:2304.07193,
+2023.
+[30] A. Holzinger, C. Biemann, C. S. Pattichis, and D. B. Kell, “Human-
+in-the-loop machine learning: a state of the art,”Artificial Intelligence
+Review, vol. 55, no. 3, pp. 1909–1969, 2022.
+

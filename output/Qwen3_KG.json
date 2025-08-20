@@ -1,0 +1,34 @@
+{
+  "nodes": [
+    {"id": "MastSAM", "type": "Concept"},
+    {"id": "Multi-view Inconsistency", "type": "Concept"},
+    {"id": "2D Foundation Models", "type": "Concept"},
+    {"id": "3D Space Mapping", "type": "Concept"},
+    {"id": "CLIP", "type": "2D Foundation Model"},
+    {"id": "SAM", "type": "2D Foundation Model"},
+    {"id": "Mast3R", "type": "Algorithm"},
+    {"id": "Points Tracker", "type": "Module"},
+    {"id": "Mask Consistency", "type": "Concept"},
+    {"id": "Segmentation", "type": "Task"},
+    {"id": "Video Segmentation", "type": "Task"},
+    {"id": "3D Perception", "type": "Field"},
+    {"id": "Data Scarcity and Diversity", "type": "Challenge"},
+    {"id": "Radiance-field Representation", "type": "Technique"},
+    {"id": "Gaussian Splatting", "type": "Technique"}
+  ],
+  "relationships": [
+    {"source": "MastSAM", "target": "Multi-view Inconsistency", "type": "Solves"},
+    {"source": "MastSAM", "target": "2D Foundation Models", "type": "Uses"},
+    {"source": "MastSAM", "target": "3D Space Mapping", "type": "Employs"},
+    {"source": "MastSAM", "target": "Mast3R", "type": "Leverages"},
+    {"source": "MastSAM", "target": "Points Tracker", "type": "Incorporates"},
+    {"source": "MastSAM", "target": "Mask Consistency", "type": "Ensures"},
+    {"source": "2D Foundation Models", "target": "CLIP", "type": "Includes"},
+    {"source": "2D Foundation Models", "target": "SAM", "type": "Includes"},
+    {"source": "SAM", "target": "Segmentation", "type": "Performs"},
+    {"source": "SAM", "target": "Video Segmentation", "type": "Extends to"},
+    {"source": "3D Perception", "target": "Data Scarcity and Diversity", "type": "Challenged by"},
+    {"source": "3D Perception", "target": "Radiance-field Representation", "type": "Utilizes"},
+    {"source": "3D Perception", "target": "Gaussian Splatting", "type": "Utilizes"}
+  ]
+}
