@@ -112,32 +112,32 @@ pip install -r requirements.txt
 
 ## 🚀 运行指南
 
-###直接运行
+### 直接运行
 
-      * **零参数运行 (使用所有默认值)**：
+* **零参数运行 (使用所有默认值)**：
 
-        ```bash
-        python main_rag_app.py
-        ```
+```bash
+python main_rag_app.py
+```
 
-        它会自动处理 `input/KG_test.pdf`，提问 "What is the method of MastSAM?"，并将结果保存在 `rag_output/rag_answer.txt`。如果知识图谱和向量库已存在，它会直接跳到问答步骤。
+它会自动处理 `input/KG_test.pdf`，提问 "What is the method of MastSAM?"，并将结果保存在 `rag_output/rag_answer.txt`。如果知识图谱和向量库已存在，它会直接跳到问答步骤。
 
-      * **指定问题和输入/输出文件**：
+* **指定问题和输入/输出文件**：
 
-        ```bash
-        python main_rag_app.py -i input/MyOtherReport.docx -q "这份报告的核心观点是什么？" -o rag_output/report_summary.txt
-        ```
+```bash
+python main_rag_app.py -i input/MyOtherReport.docx -q "这份报告的核心观点是什么？" -o rag_output/report_summary.txt
+```
 
-        这个命令会处理 `MyOtherReport.docx`，为它构建新的知识图谱和向量库（保存在 `output/MyOtherReport_KG.json` 和 `vector_db/MyOtherReport_faiss_index`），然后回答指定问题，并将结果保存。
+这个命令会处理 `MyOtherReport.docx`，为它构建新的知识图谱和向量库（保存在 `output/MyOtherReport_KG.json` 和 `vector_db/MyOtherReport_faiss_index`），然后回答指定问题，并将结果保存。
 
-      * **强制重新构建**：
+* **强制重新构建**：
 
-        ```bash
-        python main_rag_app.py --force-rebuild
-        ```
+```bash
+python main_rag_app.py --force-rebuild
+```
 
 
-###分布运行
+### 分布运行
 
 请按照以下顺序执行脚本，完成整个RAG流程。
 
