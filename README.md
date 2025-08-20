@@ -129,6 +129,12 @@ python 1_build_kg.py
   * **输入**: `input/KG_test.pdf` (默认，可在代码中修改)
   * **输出**: `output/test_KG.json`
 
+或者直接在命令行修改输入输出的文件地址
+
+```bash
+python 1_build_kg.py --input_file input/KG_test.pdf --output_file output/test_KG.json
+```
+
 ### 第3步: 创建向量数据库
 
 运行 `2_build_vectorstore.py` 脚本，它会对文档进行切分、向量化，并构建FAISS索引。
@@ -140,6 +146,12 @@ python 2_build_vectorstore.py
   * **输入**: `input/KG_test.pdf` (默认，可在代码中修改)
   * **输出**: `vector_db/faiss_pdf_chonky_index` 文件夹
 
+或者直接在命令行修改输入输出的文件地址
+
+```bash
+python 2_build_vectorstore.py --pdf_file input/KG_test.pdf --pdf_query "你的PDF问题" --pdf_output output/chonky_chunk_pdf.txt --pdf_db_pat vector_db/faiss_pdf_chonky_index
+```
+
 ### 第4步: 执行混合检索问答
 
 这是最后一步。运行核心脚本 `3_hybrid_rag_cli.py`，并提出你的问题。
@@ -148,6 +160,12 @@ python 2_build_vectorstore.py
 
 ```bash
 python 3_hybrid_rag_cli.py -h
+```
+
+或者直接在命令行修改输入输出的文件地址
+
+```bash
+python 3_hybrid_rag_cli.py "你的PDF问题" --kg-path "my_data/kg.json" --db-path "my_data/faiss_db" --output-file "rag_output/answer1.txt"
 ```
 
 **示例用法:**
@@ -163,7 +181,7 @@ python 3_hybrid_rag_cli.py -h
   * **指定自定义路径进行提问：**
 
     ```bash
-    python 3_hybrid_rag_cli.py "How does Chronomirror work?" --kg-path "my_kg.json" --db-path "my_faiss_db" --output-file "my_answer.txt"
+    python 3_hybrid_rag_cli.py "你的问题" --kg-path "output/test_KG.json" --db-path "vector_db/faiss_pdf_chonky_index" --output-file "rag_output/answer1.txt"
     ```
 
     这个命令会从你指定的路径加载数据，并将结果保存在 `my_answer.txt`。
