@@ -110,7 +110,7 @@ def search_from_faiss(query: str, embedding_model, db_path: str, k: int = 3) -> 
     #CHROMEDB
 
 # --- 主执行流程 ---
-#运行指令 python tokenlization_chonky.py --pdf_file input/your.pdf --docx_file input/your.docx --pdf_query "你的PDF问题" --docx_query "你的Word问题"
+#运行指令 python 2_build_vectorstore.py --pdf_file input/your.pdf --docx_file input/your.docx --pdf_query "你的PDF问题" --docx_query "你的Word问题"
 if __name__ == "__main__":
     import sys
     sys.stdout.reconfigure(encoding='utf-8')

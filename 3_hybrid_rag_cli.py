@@ -155,7 +155,7 @@ def main(args):
 
 
 # --- 3. 【新增】主执行入口：设置和解析命令行参数 ---
-#运行指令：python Hybrid_Retrieval.py "What is the method of MastSAM?" --kg-path "my_data/kg.json" --db-path "my_data/faiss_db" --output-file "results/answer1.txt"
+#运行指令：python 3_hybrid_rag_cli.py "What is the method of MastSAM?" --kg-path "my_data/kg.json" --db-path "my_data/faiss_db" --output-file "rag_output/answer1.txt"
 if __name__ == "__main__":
     sys.stdout.reconfigure(encoding='utf-8')
 
@@ -187,7 +187,7 @@ if __name__ == "__main__":
     parser.add_argument(
         "--output-file", 
         type=str, 
-        default="output/rag_answer.txt", 
+        default="rag_output/rag_answer.txt", 
         help="保存最终答案的文本文件路径 (默认: rag_answer/rag_answer.txt)"
     )
 
