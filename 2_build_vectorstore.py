@@ -101,6 +101,7 @@ def search_from_faiss(query: str, embedding_model, db_path: str, k: int = 3) -> 
 
     #query 是不是应该先用llm提取关键词再进行相似度检索！！！
     #直接similarity是不是有点粗糙？使用cross-encoder会不会好点？
+    #尝试使用了llm和cross-encoder的组合,效果不明显
     results = db.similarity_search(query, k=k)
     end_time = time.time()
     duration = end_time - start_time
