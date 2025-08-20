@@ -125,16 +125,18 @@ python main_rag_app.py
 * **指定问题和输入/输出文件**：
 
 ```bash
-python main_rag_app.py -i input/MyOtherReport.docx -q "这份报告的核心观点是什么？" -o rag_output/report_summary.txt
+python main_rag_app.py -i input/report.pdf -q "你想问的问题" -o rag_output/answer_report.txt
 ```
 
-这个命令会处理 `MyOtherReport.docx`，为它构建新的知识图谱和向量库（保存在 `output/MyOtherReport_KG.json` 和 `vector_db/MyOtherReport_faiss_index`），然后回答指定问题，并将结果保存。
+这个命令会处理 `report.pdf`，为它构建新的知识图谱和向量库（保存在 `output/MyOtherReport_KG.json` 和 `vector_db/MyOtherReport_faiss_index`），然后回答指定问题，并将结果保存。
 
 * **强制重新构建**：
 
 ```bash
 python main_rag_app.py --force-rebuild
 ```
+
+这个命令会删除 input/KG_test.pdf 对应的旧知识图谱和向量库，然后用最新的代码重新生成它们，最后再进行问答。当你修改了构建逻辑或源文件内容时，这个参数非常有用。
 
 
 ### 分布运行
