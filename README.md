@@ -22,6 +22,50 @@
 
 -----
 
+```mermaid
+graph TD
+    %% Define styles for different node types
+    classDef process fill:#f9f,stroke:#333,stroke-width:2px;
+    classDef data fill:#bbf,stroke:#333,stroke-width:2px;
+    classDef model fill:#ffc,stroke:#333,stroke-width:2px;
+    classDef user fill:#9f9,stroke:#333,stroke-width:2px;
+
+    %% Phase 1: Offline Indexing (Data Preparation)
+    subgraph "Offline Indexing Phase (数据准备阶段)"
+        A["Source Document (.pdf/.docx)"] --> B("1. LLM Knowledge Extraction");
+        A --> C("2. Semantic Text Splitting");
+        
+        B -- uses --> M1["LLM: Qwen-plus"];
+        B -- generates --> D{"Knowledge Graph (JSON)"};
+        
+        C -- uses --> M2["Chonky Splitter"];
+        C --> E["Text Chunks"];
+        E -- uses --> M3["Embedding Model: Qwen-Embedding"];
+        E --> F{"FAISS Vector Store"};
+    end
+
+    %% Phase 2: Online Querying (Real-time RAG)
+    subgraph "Online Querying Phase (在线问答阶段)"
+        U["User Query"] --> R("Hybrid Retriever");
+        
+        D -- provides precise facts --> R;
+        F -- provides semantic context --> R;
+        
+        R --> CTX["Fused Context"];
+        U --> G("Generator LLM: Qwen-plus");
+        CTX --> G;
+        
+        G --> ANS["Final Answer"];
+        ANS --> O("Output File (.txt)");
+    end
+
+    %% Apply styles
+    class A,U,ANS,O user;
+    class B,C,E,R,CTX,G process;
+    class D,F data;
+    class M1,M2,M3 model;
+
+
 
 ## 📁 项目结构
 
