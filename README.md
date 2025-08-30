@@ -7,6 +7,8 @@
 本项目是一个先进的检索增强生成（RAG）系统，旨在通过结合 **知识图谱（Knowledge Graph）** 与 **向量检索（Vector Retrieval）** 两种模式，为用户提供更精准、更深入、更具逻辑性的问答体验。
 
 与传统的仅依赖语义相似度的RAG不同，本系统首先利用Qwen大模型从源文档中提取结构化的知识图谱，同时对文档进行深度语义切分和向量化。在回答问题时，系统会并行地从知识图谱中检索精确的事实，并从向量数据库中召回相关的上下文段落，最终将两种信息融合，生成全面且可靠的答案。
+
+
 ```mermaid
 graph TD
     %% Define styles for different node types
@@ -49,6 +51,7 @@ graph TD
     class B,C,E,R,CTX,G process;
     class D,F data;
     class M1,M2,M3 model;
+
 
 ### 核心技术栈
 
