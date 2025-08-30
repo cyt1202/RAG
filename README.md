@@ -11,42 +11,38 @@
 
 ```mermaid
 graph TD
-    %% Define styles for different node types
     classDef process fill:#f9f,stroke:#333,stroke-width:2px;
     classDef data fill:#bbf,stroke:#333,stroke-width:2px;
     classDef model fill:#ffc,stroke:#333,stroke-width:2px;
     classDef user fill:#9f9,stroke:#333,stroke-width:2px;
 
-    %% Phase 1: Offline Indexing (Data Preparation)
     subgraph Offline Indexing Phase (数据准备阶段)
-        A[📁 源文档 .pdf/.docx] --> B(1. LLM 知识提取);
-        A --> C(2. 语义文本切分);
+        A["源文档 .pdf/.docx"] --> B("1. LLM 知识提取");
+        A --> C("2. 语义文本切分");
         
-        B -- 使用 --> M1[🧠 LLM: Qwen-plus];
-        B -- 生成 --> D{🗂️ 知识图谱 (JSON)};
+        B -- 使用 --> M1["LLM: Qwen-plus"];
+        B -- 生成 --> D{"知识图谱 (JSON)"};
         
-        C -- 使用 --> M2[✂️ Chonky 分割器];
-        C --> E[📝 文本块 Chunks];
-        E -- 使用 --> M3[💡 嵌入模型 Qwen-Embedding];
-        E --> F{💾 FAISS 向量数据库};
+        C -- 使用 --> M2["Chonky 分割器"];
+        C --> E["文本块 Chunks"];
+        E -- 使用 --> M3["嵌入模型 Qwen-Embedding"];
+        E --> F{"FAISS 向量数据库"};
     end
 
-    %% Phase 2: Online Querying (Real-time RAG)
     subgraph Online Querying Phase (在线问答阶段)
-        U[👤 用户问题] --> R(🤖 混合检索器 Hybrid Retriever);
+        U["用户问题"] --> R("混合检索器 Hybrid Retriever");
         
-        D -- 精确事实 --> R;
-        F -- 语义上下文 --> R;
+        D -- "精确事实" --> R;
+        F -- "语义上下文" --> R;
         
-        R --> CTX[📜 融合后的上下文];
-        U --> G(🧠 生成模型 LLM: Qwen-plus);
+        R --> CTX["融合后的上下文"];
+        U --> G("生成模型 LLM: Qwen-plus");
         CTX --> G;
         
-        G --> ANS[📄 最终答案];
-        ANS --> O(💾 输出文件 .txt);
+        G --> ANS["最终答案"];
+        ANS --> O("输出文件 .txt");
     end
 
-    %% Apply styles
     class A,U,ANS,O user;
     class B,C,E,R,CTX,G process;
     class D,F data;
