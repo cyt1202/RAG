@@ -7,6 +7,48 @@
 本项目是一个先进的检索增强生成（RAG）系统，旨在通过结合 **知识图谱（Knowledge Graph）** 与 **向量检索（Vector Retrieval）** 两种模式，为用户提供更精准、更深入、更具逻辑性的问答体验。
 
 与传统的仅依赖语义相似度的RAG不同，本系统首先利用Qwen大模型从源文档中提取结构化的知识图谱，同时对文档进行深度语义切分和向量化。在回答问题时，系统会并行地从知识图谱中检索精确的事实，并从向量数据库中召回相关的上下文段落，最终将两种信息融合，生成全面且可靠的答案。
+```mermaid
+graph TD
+    %% Define styles for different node types
+    classDef process fill:#f9f,stroke:#333,stroke-width:2px;
+    classDef data fill:#bbf,stroke:#333,stroke-width:2px;
+    classDef model fill:#ffc,stroke:#333,stroke-width:2px;
+    classDef user fill:#9f9,stroke:#333,stroke-width:2px;
+
+    %% Phase 1: Offline Indexing (Data Preparation)
+    subgraph Offline Indexing Phase (数据准备阶段)
+        A[📁 源文档 .pdf/.docx] --> B(1. LLM 知识提取);
+        A --> C(2. 语义文本切分);
+        
+        B -- 使用 --> M1[🧠 LLM: Qwen-plus];
+        B -- 生成 --> D{🗂️ 知识图谱 (JSON)};
+        
+        C -- 使用 --> M2[✂️ Chonky 分割器];
+        C --> E[📝 文本块 Chunks];
+        E -- 使用 --> M3[💡 嵌入模型 Qwen-Embedding];
+        E --> F{💾 FAISS 向量数据库};
+    end
+
+    %% Phase 2: Online Querying (Real-time RAG)
+    subgraph Online Querying Phase (在线问答阶段)
+        U[👤 用户问题] --> R(🤖 混合检索器 Hybrid Retriever);
+        
+        D -- 精确事实 --> R;
+        F -- 语义上下文 --> R;
+        
+        R --> CTX[📜 融合后的上下文];
+        U --> G(🧠 生成模型 LLM: Qwen-plus);
+        CTX --> G;
+        
+        G --> ANS[📄 最终答案];
+        ANS --> O(💾 输出文件 .txt);
+    end
+
+    %% Apply styles
+    class A,U,ANS,O user;
+    class B,C,E,R,CTX,G process;
+    class D,F data;
+    class M1,M2,M3 model;
 
 ### 核心技术栈
 
