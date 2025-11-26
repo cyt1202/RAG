@@ -54,7 +54,7 @@ llm = ChatOpenAI(
     api_key=DASHSCOPE_API_KEY,
     base_url="https://dashscope.aliyuncs.com/compatible-mode/v1"
 )
-print("✅ LLM (qwen-plus) 初始化成功。")
+print("LLM (qwen-plus) 初始化成功。")
 
 # 初始化用于向量化的嵌入模型
 embedding_model = SentenceTransformerEmbeddings(
@@ -62,7 +62,7 @@ embedding_model = SentenceTransformerEmbeddings(
     model_kwargs={},
     encode_kwargs={'prompt_name': "query"}
 )
-print("✅ 嵌入模型 (Qwen3-Embedding-0.6B) 初始化成功。")
+print("嵌入模型 (Qwen3-Embedding-0.6B) 初始化成功。")
 
 
 # --- 1. 数据处理与构建函数 ---
@@ -86,7 +86,7 @@ def build_knowledge_graph(llm_for_kg: ChatOpenAI, input_file: str, output_kg_pat
     documents = [Document(page_content=full_text)]
 
     # 使用LLMGraphTransformer构建图谱
-    # 注意：ChatTongyi在之前测试中存在问题，这里我们统一使用更稳定的ChatOpenAI接口
+    # 注意：ChatTongyi在之前测试中存在问题，这里我们使用更稳定的ChatOpenAI接口
     transformer = LLMGraphTransformer(llm=llm_for_kg)
     graph_documents = transformer.convert_to_graph_documents(documents)
 
@@ -102,7 +102,7 @@ def build_knowledge_graph(llm_for_kg: ChatOpenAI, input_file: str, output_kg_pat
         json.dump(output_data, f, indent=4, ensure_ascii=False)
     
     duration = time.time() - start_time
-    print(f"✅ 知识图谱构建完成，耗时: {duration:.2f} 秒。")
+    print(f"知识图谱构建完成，耗时: {duration:.2f} 秒。")
 
 def build_vector_store(embedding_model, input_file: str, output_db_path: str):
     """对文档进行切分、向量化并构建FAISS数据库。"""
@@ -136,7 +136,7 @@ def build_vector_store(embedding_model, input_file: str, output_db_path: str):
     db.save_local(output_db_path)
     
     duration = time.time() - start_time
-    print(f"✅ 向量数据库构建完成并保存至 '{output_db_path}'，耗时: {duration:.2f} 秒。")
+    print(f"向量数据库构建完成并保存至 '{output_db_path}'，耗时: {duration:.2f} 秒。")
 
 
 # --- 2. 混合检索与生成的核心逻辑 ---
@@ -208,7 +208,7 @@ def run_hybrid_rag(llm_for_rag, embedding_model, query, kg_path, db_path, output
         if output_dir: os.makedirs(output_dir, exist_ok=True)
         with open(output_file, 'w', encoding='utf-8') as f:
             f.write(f"--- 用户问题 ---\n{query}\n\n--- 模型生成的答案 ---\n{answer}")
-        print("✅ 答案写入成功。")
+        print("答案写入成功。")
     except Exception as e:
         print(f"错误：写入文件失败: {e}")
 
@@ -263,19 +263,19 @@ if __name__ == "__main__":
 
     # 2. 检查是否需要强制重建或缓存不存在，如果需要，则运行构建步骤
     if args.force_rebuild:
-        print("⚡️ 检测到 --force-rebuild 参数，将强制重建所有数据...")
+        print(" 检测到 --force-rebuild 参数，将强制重建所有数据...")
         if os.path.exists(kg_path): os.remove(kg_path)
         if os.path.exists(db_path): shutil.rmtree(db_path) # 删除文件夹
 
     if not os.path.exists(kg_path):
         build_knowledge_graph(llm, args.input_file, kg_path)
     else:
-        print(f"ℹ️ 知识图谱 '{kg_path}' 已存在，跳过构建步骤。")
+        print(f" 知识图谱 '{kg_path}' 已存在，跳过构建步骤。")
 
     if not os.path.exists(db_path):
         build_vector_store(embedding_model, args.input_file, db_path)
     else:
-        print(f"ℹ️ 向量数据库 '{db_path}' 已存在，跳过构建步骤。")
+        print(f" 向量数据库 '{db_path}' 已存在，跳过构建步骤。")
 
     # 3. 运行RAG问答
     run_hybrid_rag(llm, embedding_model, args.query, kg_path, db_path, args.output_file)
