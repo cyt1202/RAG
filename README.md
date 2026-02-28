@@ -4,7 +4,7 @@
 [](https://www.langchain.com/)
 [](https://github.com/facebookresearch/faiss)
 
-![架构图](./pipeline.png)
+![架构图](pipeline.png)
 
 本项目是一个先进的检索增强生成（RAG）系统，旨在通过结合 **知识图谱（Knowledge Graph）** 与 **向量检索（Vector Retrieval）** 两种模式，为用户提供更精准、更深入、更具逻辑性的问答体验。
 
